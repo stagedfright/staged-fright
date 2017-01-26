@@ -3,6 +3,10 @@ import styles from './styles';
 import BasicSingleLineInput from '../BasicSingleLineInput';
 import InitialLoading from '../InitialLoading';
 import {Entity, Scene} from 'aframe-react';
+import { speech } from '../../../../public/speech.js'
+console.log('THIS IS THE SPEEEEEEEEECH    ', speech)
+
+const hello = 'Hello World';
 
 export default class WelcomeDiv extends Component {
   render () {
@@ -33,6 +37,8 @@ export default class WelcomeDiv extends Component {
             <video id="mvp" autoplay loop src="DT_RNC.mp4" />
           </a-assets>
           <a-videosphere src="#mvp"></a-videosphere>
+
+          <a-entity bmfont-text={`text: ${speech}; color: white; lineHeight: 100px;`}></a-entity>
           <a-entity position="0 0 3.8">
             <a-camera></a-camera>
           </a-entity>
