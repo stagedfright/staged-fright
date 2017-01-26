@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { AppContainer } from './containers';
 import 'aframe';
+import 'aframe-bmfont-text-component';
 
 import SOCKET from '../sockets';
 
