@@ -3,6 +3,7 @@
 This builds off of Eliot's React/Aframe boilerplate, Meme Magic.
 
   Set up:
+
     1. $ createdb staged-fright (just for the first time, obvs)
 
     2. Make a `secrets.js` file in the root directory.
