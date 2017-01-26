@@ -4,6 +4,9 @@ import BasicSingleLineInput from '../BasicSingleLineInput';
 import InitialLoading from '../InitialLoading';
 import {Entity, Scene} from 'aframe-react';
 import { speech } from '../../../../public/speech.js'
+console.log('THIS IS THE SPEEEEEEEEECH    ', speech)
+
+const hello = 'Hello World';
 
 export default class WelcomeDiv extends Component {
   render () {
