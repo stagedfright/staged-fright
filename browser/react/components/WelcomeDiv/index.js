@@ -29,7 +29,10 @@ export default class WelcomeDiv extends Component {
         */}
 
         <a-scene>
-          <a-sphere position="0 1.25 -1" radius="1.25" color="#EF2D5E"></a-sphere>
+          <a-assets>
+            <video id="mvp" autoplay loop src="DT_RNC.mp4" />
+          </a-assets>
+          <a-videosphere src="#mvp"></a-videosphere>
           <a-entity position="0 0 3.8">
             <a-camera></a-camera>
           </a-entity>
