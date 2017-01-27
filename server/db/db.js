@@ -6,7 +6,7 @@ import Sequelize from 'sequelize';
 
 const ourDB = 'staged-fright';
 
-console.log(chalk.yellow('Hey Rick!'));
+//console.log(chalk.yellow('Hey Rick!'));
 
 const _db = new Sequelize(ourDB, null, null, {host: 'localhost', logging: false, dialect: 'postgres', native: true});
 

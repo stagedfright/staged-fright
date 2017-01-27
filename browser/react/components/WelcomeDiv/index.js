@@ -14,27 +14,9 @@ export default class WelcomeDiv extends Component {
 
     return (
       <div>
-        <div style={styles.test}>
-        {
-          isInitialized
-           ?
-          (<div>
-            <h1> { welcomeText } </h1>
-            <BasicSingleLineInput handleSubmit={handleSubmit} />
-          </div>)
-           :
-          (<InitialLoading />)
-        }
-        </div>
-        {/* This 'Scene' madness is aframe-react abstracting.
-        <Scene>
-          <Entity geometry={{primitive: 'box'}} material="color: red" position={[0, 0, -5]}/>
-        </Scene>
-        */}
-
         <a-scene>
           <a-assets>
-            <video id="mvp" autoplay loop src="DT_RNC.mp4" />
+            <video muted id="mvp" autoplay loop src="DT_RNC.mp4" />
           </a-assets>
           <a-videosphere src="#mvp"></a-videosphere>
 
