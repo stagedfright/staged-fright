@@ -42504,28 +42504,12 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { style: _styles2.default.test },
-	          isInitialized ? _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              ' ',
-	              welcomeText,
-	              ' '
-	            ),
-	            _react2.default.createElement(_BasicSingleLineInput2.default, { handleSubmit: handleSubmit })
-	          ) : _react2.default.createElement(_InitialLoading2.default, null)
-	        ),
-	        _react2.default.createElement(
 	          'a-scene',
 	          null,
 	          _react2.default.createElement(
 	            'a-assets',
 	            null,
-	            _react2.default.createElement('video', { id: 'mvp', autoplay: true, loop: true, src: 'DT_RNC.mp4' })
+	            _react2.default.createElement('video', { muted: true, id: 'mvp', autoplay: true, loop: true, src: 'DT_RNC.mp4' })
 	          ),
 	          _react2.default.createElement('a-videosphere', { src: '#mvp' }),
 	          _react2.default.createElement('a-entity', { 'bmfont-text': 'text: ' + _speech.speech + '; color: white; lineHeight: 100px;' }),
@@ -117633,7 +117617,7 @@
 	var xtend = __webpack_require__(508)
 	
 	var xml2 = (function hasXML2() {
-	  return window.XMLHttpRequest && "withCredentials" in new XMLHttpRequest
+	  return self.XMLHttpRequest && "withCredentials" in new XMLHttpRequest
 	})()
 	
 	module.exports = function(opt, cb) {
@@ -117711,16 +117695,17 @@
 	  if (xml2)
 	    return xtend(opt, { responseType: 'arraybuffer' })
 	  
-	  if (typeof window.XMLHttpRequest === 'undefined')
+	  if (typeof self.XMLHttpRequest === 'undefined')
 	    throw new Error('your browser does not support XHR loading')
 	
 	  //IE9 and XML1 browsers could still use an override
-	  var req = new window.XMLHttpRequest()
+	  var req = new self.XMLHttpRequest()
 	  req.overrideMimeType('text/plain; charset=x-user-defined')
 	  return xtend({
 	    xhr: req
 	  }, opt)
 	}
+	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(521).Buffer))
 
 /***/ },
