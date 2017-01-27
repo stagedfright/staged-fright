@@ -38,7 +38,15 @@ export default class WelcomeDiv extends Component {
           </a-assets>
           <a-videosphere src="#mvp"></a-videosphere>
 
-          <a-entity bmfont-text={`text: ${speech}; color: white; lineHeight: 100px;`}></a-entity>
+          <a-entity position="-2.28 0 0" bmfont-text={`text: ${speech}; color: white; lineHeight: 50px;`}>
+            <a-animation
+              attribute="position"
+              dur="10000"
+              fill="forwards"
+              from=""
+              to="0 360 0"
+              repeat="indefinite"></a-animation>
+          </a-entity>
           <a-entity position="0 0 3.8">
             <a-camera></a-camera>
           </a-entity>

@@ -42528,7 +42528,17 @@
 	            _react2.default.createElement('video', { id: 'mvp', autoplay: true, loop: true, src: 'DT_RNC.mp4' })
 	          ),
 	          _react2.default.createElement('a-videosphere', { src: '#mvp' }),
-	          _react2.default.createElement('a-entity', { 'bmfont-text': 'text: ' + _speech.speech + '; color: white; lineHeight: 100px;' }),
+	          _react2.default.createElement(
+	            'a-entity',
+	            { position: '-2.28 0 0', 'bmfont-text': 'text: ' + _speech.speech + '; color: white; lineHeight: 50px;' },
+	            _react2.default.createElement('a-animation', {
+	              attribute: 'position',
+	              dur: '10000',
+	              fill: 'forwards',
+	              from: '',
+	              to: '0 360 0',
+	              repeat: 'indefinite' })
+	          ),
 	          _react2.default.createElement(
 	            'a-entity',
 	            { position: '0 0 3.8' },
