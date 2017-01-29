@@ -8,9 +8,9 @@ const fetchText = () => {
 };
 
 // Redirect a user.
-socket.on('KickTroll', () => {
-  window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-});
+// socket.on('KickTroll', () => {
+//   window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+// });
 
 // After we have initialized a user, lets get their information again.
 socket.on('InitUser', () => {
