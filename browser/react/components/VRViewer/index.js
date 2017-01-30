@@ -8,7 +8,7 @@ console.log('THIS IS THE SPEEEEEEEEECH    ', speech)
 
 const hello = 'Hello World';
 
-export default class WelcomeDiv extends Component {
+export default class VRViewer extends Component {
   render () {
     const { welcomeText, handleSubmit, isInitialized } = this.props;
 
@@ -39,13 +39,13 @@ export default class WelcomeDiv extends Component {
   }
 }
 
-WelcomeDiv.defaultProps = {
+VRViewer.defaultProps = {
   handleSubmit: () => {
     console.log('Still fetching dispatch from server...');
   }
 };
 
-WelcomeDiv.propTypes = {
+VRViewer.propTypes = {
   welcomeText: React.PropTypes.string,
   handleSubmit: React.PropTypes.func
 };

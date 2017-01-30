@@ -1,9 +1,13 @@
-import WelcomeDiv from '../components/WelcomeDiv';
+import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
 import { changeWelcomeText } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
-  welcomeText: state.get('welcomeText'),
+  speechLines: state.get('speechLines'),
+  wpm: state.get('wpm'),
+  prevLine: state.get('prevLine'),
+  currentLine: state.get('currentLine'),
+  nextLine: state.get('nextLine'),
   isInitialized: state.get('isInitialized')
 });
 
@@ -16,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WelcomeDiv);
+export default connect(mapStateToProps, mapDispatchToProps)(VRViewer);
