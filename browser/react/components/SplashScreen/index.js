@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import { MyRaisedButton } from '../uiElements';
+import { Link } from 'react-router';
 
 export default class SplashScreen extends Component {
 
@@ -30,7 +31,9 @@ export default class SplashScreen extends Component {
 				<h1 style={styles.overlayTextBig}>
 					Choose StagedFright®
 				</h1>
-				<MyRaisedButton/>
+				<Link to="/new-speech">
+					<MyRaisedButton/>
+				</Link>
 			</div>;
 		else overlayText = 
 			<a href="#" style={styles.overlayText}>
