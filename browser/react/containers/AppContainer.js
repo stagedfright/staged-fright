@@ -1,6 +1,6 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-import { changeWelcomeText } from '../../redux/action-creators';
+import { changeWelcomeText, changeLines } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
   speechLines: state.get('speechLines'),
@@ -17,7 +17,19 @@ const mapDispatchToProps = dispatch => ({
     evt.preventDefault();
     dispatch(changeWelcomeText(evt.target.textField.value));
     evt.target.textField.value = '';
+  },
+
+  scrollLines: (wpm, numOfLines) => {
+    var interval = Math.floor((60 / (wpm / 7)) * 1000);
+    var counter = 0;
+    var scroller = setInterval(function() {
+      dispatch(changeLines);
+      if (++counter === numOfLines - 3) {
+        window.clearInterval(scroller);
+      }
+    }, interval);
   }
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VRViewer);
