@@ -7,7 +7,8 @@ import { lightGreenA700 } from 'material-ui/styles/colors';
 const MyRaisedButton = () => (
   <div>
     <RaisedButton 
-      label="Let's go!" 
+      label="Let's go!"
+      type="submit" 
       backgroundColor={lightGreenA700} 
       style={styles.myraisedbutton} 
       labelStyle={styles.myraisedbuttonlabel} />
