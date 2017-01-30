@@ -22,7 +22,7 @@ export default class VRViewer extends Component {
       <div>
         <a-scene>
           <a-assets>
-            <video muted id="mvp" autoplay loop src="DT_RNC.mp4" />
+            <video muted id="mvp" autoPlay loop src="DT_RNC.mp4" />
           </a-assets>
           <a-videosphere src="#mvp"></a-videosphere>
           <a-entity position="0 0 3.8">
