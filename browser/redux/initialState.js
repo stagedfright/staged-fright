@@ -6,6 +6,7 @@ const initialState = Map({
   isInitialized: false,
   wpm: 120,
   speechLines: [],
+  locationBeforeTransitions: null
 });
 
 export default initialState;
