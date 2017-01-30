@@ -9,7 +9,7 @@
   "author": "Eliot Szwajkowski",
   "license": "ISC",
   "dependencies": {
-    "aframe": "^0.4.1",
+    "aframe": "github:aframevr/aframe",
     "aframe-bmfont-text-component": "^0.1.4",
     "aframe-react": "^3.4.1",
     "axios": "^0.15.3",

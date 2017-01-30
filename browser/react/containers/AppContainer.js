@@ -23,7 +23,8 @@ const mapDispatchToProps = dispatch => ({
     var interval = Math.floor((60 / (wpm / 7)) * 1000);
     var counter = 0;
     var scroller = setInterval(function() {
-      dispatch(changeLines);
+      dispatch(changeLines());
+      console.log("SCROLL LINES HAS BEEN CALLED ", counter)
       if (++counter === numOfLines - 3) {
         window.clearInterval(scroller);
       }
