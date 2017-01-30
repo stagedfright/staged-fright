@@ -13,6 +13,7 @@ export default class NewSpeechForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log(props);
   }
 
   handleChange = field => event => {
@@ -21,12 +22,11 @@ export default class NewSpeechForm extends Component {
     this.setState({
       [`${field}`]: value
     })
-    console.log('changed!', this.state);
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.submitSpeechData({
+    this.props.submitSpeechDataForm({
       wpm: this.state.wpm,
       speechText: this.state.speechText
     });
