@@ -1,12 +1,31 @@
 import {
   CHANGE_WELCOME,
   SET_INITIALIZED,
-  SET_DISPLAY_LINES
+  SET_DISPLAY_LINES,
+  SET_SPEECH_DATA
 } from '../constants';
 import axios from 'axios';
+import { push } from 'react-router-redux';
 
-const createWelcomeText = (text) => ({ type: CHANGE_WELCOME, welcomeText: text });
-const createInitialized = () => ({ type: SET_INITIALIZED });
+
+const createWelcomeText = (text) => ({
+  type: CHANGE_WELCOME,
+  welcomeText: text
+});
+const createInitialized = () => ({
+  type: SET_INITIALIZED
+});
+
+const setSpeechData = ({ wpm, speechLines }) => ({
+  type: SET_SPEECH_DATA,
+  wpm,
+  speechLines
+});
+
+export const submitSpeechData = fields => dispatch => {
+  dispatch(setSpeechData(fields));
+  dispatch(push('/practice'));
+};
 
 export const changeLines = () => ({ type: SET_DISPLAY_LINES });
 
