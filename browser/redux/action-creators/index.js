@@ -4,6 +4,8 @@ import {
   SET_SPEECH_DATA,
 } from '../constants';
 import axios from 'axios';
+import { push } from 'react-router-redux';
+
 
 const createWelcomeText = (text) => ({ 
   type: CHANGE_WELCOME, 
@@ -13,10 +15,16 @@ const createInitialized = () => ({
   type: SET_INITIALIZED 
 });
 
-export const setSpeechData = ({ wpm, speechLines }) => ({ type: SET_SPEECH_DATA, 
+const setSpeechData = ({ wpm, speechLines }) => ({
+  type: SET_SPEECH_DATA, 
   wpm, 
   speechLines 
 });
+
+export const submitSpeechData = fields => dispatch => {
+  dispatch(setSpeechData(fields));
+  dispatch(push('/practice'));
+};
 
 // Used by the front end to live change the welcomeText.
 export const changeWelcomeText = text => dispatch => {
