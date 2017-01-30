@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
 import styles from './styles';
-import BasicSingleLineInput from '../BasicSingleLineInput';
-import InitialLoading from '../InitialLoading';
-import {Entity, Scene} from 'aframe-react';
+// import BasicSingleLineInput from '../BasicSingleLineInput';
+// import InitialLoading from '../InitialLoading';
+//import {Entity, Scene} from 'aframe-react';
 import {speech} from '../../../../public/speech-line-test-data.js'
-console.log('THIS IS THE SPEEEEEEEEECH    ', speech)
-
-const hello = 'Hello World';
 
 export default class VRViewer extends Component {
-
-  // var scollFunc = this.props.scrollLines();
 
   constructor(props) {
     super(props);
   }
 
   componentDidMount () {
-    //this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
-    this.props.scrollLines(140, speech.length)
+    this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
   }
 
   render () {
@@ -35,14 +29,13 @@ export default class VRViewer extends Component {
             <a-camera>
             </a-camera>
           </a-entity>
-          <a-entity position=".28 4 -.26" scale="5 5 5" text={`value: ${speech[+this.props.prevLine]}; lineHeight: 50px;`}>
+          <a-entity position=".28 4 -.26" scale="5 5 5" text={`value: ${this.props.speechLines[this.props.prevLine]}; lineHeight: 50px;`}>
           </a-entity>
-          <a-entity position=".28 3 -.26" scale="5 5 5" text={`value: ${speech[+this.props.currentLine]}; lineHeight: 50px;`}>
+          <a-entity position=".28 3 -.26" scale="5 5 5" text={`value: ${this.props.speechLines[this.props.currentLine]}; lineHeight: 50px;`}>
           </a-entity>
-          <a-entity position=".28 2 -.26" scale="5 5 5" text={`value: ${speech[+this.props.nextLine]}; lineHeight: 50px;`}>
+          <a-entity position=".28 2 -.26" scale="5 5 5" text={`value: ${this.props.speechLines[this.props.nextLine]}; lineHeight: 50px;`}>
           </a-entity>
         </a-scene>
-        {/* This is normal AFrame. */}
       </div>
     );
   }
