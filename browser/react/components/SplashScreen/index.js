@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 export default class SplashScreen extends Component {
 
 	constructor() {
-		super();
+	super();
         this.state = { showMe : false };
         this.onClick = this.onClick.bind(this);
     }
