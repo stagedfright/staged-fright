@@ -5,7 +5,7 @@ const initialState = Map({
   isInitialized: false,
   prevLine: 0,
   currentLine: 1,
-  nextLine: 2
+  nextLine: 2,
   wpm: 120,
   speechLines: [],
   locationBeforeTransitions: null
