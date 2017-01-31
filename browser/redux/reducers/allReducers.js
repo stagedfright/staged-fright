@@ -1,5 +1,6 @@
 import welcomeReducer from './welcome-reducer';
 import initializationReducer from './initialization-reducer';
+import speechReducer from './speech-reducer';
 import formReducer from './form-reducer';
 import routingReducer from './routing-reducer';
 
@@ -7,6 +8,7 @@ import routingReducer from './routing-reducer';
 export default [
   welcomeReducer,
   initializationReducer,
-  formReducer, 
+  speechReducer,
+  formReducer,
   routingReducer
 ];

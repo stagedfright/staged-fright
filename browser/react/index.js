@@ -12,7 +12,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer, NewSpeechFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
 import 'aframe';
-import 'aframe-bmfont-text-component';
+// import 'aframe-bmfont-text-component';
 
 import SOCKET from '../sockets';
 
