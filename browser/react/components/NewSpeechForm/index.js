@@ -8,7 +8,7 @@ export default class NewSpeechForm extends Component {
     super(props);
 
     this.state = {
-      wpm: props.wpm, 
+      wpm: 120, 
       speechText: 'Copy and paste your speech text here.',
     };
     this.handleChange = this.handleChange.bind(this);
