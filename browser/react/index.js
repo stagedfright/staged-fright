@@ -8,6 +8,8 @@ window.store = store;
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import firedux from '../redux/store/firedux';
+import { addTodo } from '../redux/action-creators';
 
 import { AppContainer, NewSpeechFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
@@ -27,6 +29,9 @@ const history = syncHistoryWithStore(browserHistory, store, {
       }
   }
 })
+
+
+firedux.dispatch(addTodo('Pet my cat'))
 
 /*
   Provider = react-redux supplying context of store.

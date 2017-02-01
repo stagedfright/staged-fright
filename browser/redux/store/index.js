@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
+import firedux from './firedux';
 
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
@@ -10,12 +11,16 @@ import thunkMiddleware from 'redux-thunk';
 const rrrMiddleware = routerMiddleware(browserHistory);
 
 // Very standard.
-export default createStore(
+const store = createStore(
   rootReducer,
   applyMiddleware(
     thunkMiddleware,
     createLogger({collapsed: true}),
     rrrMiddleware
-  ), 
+  ),
   routerReducer
 );
+
+firedux.dispatch = store.dispatch
+
+export default store
