@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles';
 // import BasicSingleLineInput from '../BasicSingleLineInput';
-// import InitialLoading from '../InitialLoading';
+import InitialLoading from '../InitialLoading';
 //import {Entity, Scene} from 'aframe-react';
 import {speech} from '../../../../public/speech-line-test-data.js'
 
@@ -14,7 +14,7 @@ export default class VRViewer extends Component {
   }
 
   componentDidMount () {
-    this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
+    // this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
     this.tick(window.performance.now())
   }
 
@@ -28,9 +28,22 @@ export default class VRViewer extends Component {
   render () {
     const { handleSubmit, isInitialized } = this.props;
     const { at } = this.state
+    const scene = document.querySelector('a-scene');
+
     return (
       <div>
         <a-scene>
+
+        {/* Make the loading screen work!!
+
+          !scene.hasLoaded ?
+          <InitialLoading />
+          :
+
+
+
+        */}
+
           <a-assets>
             <video muted id="mvp" autoPlay loop src="DT_RNC.mp4" />
           </a-assets>
@@ -54,11 +67,11 @@ export default class VRViewer extends Component {
 
           {
             this.props.speechLines.map((line, idx) => ({
-              line, idx, position: [0.28, at - idx * 2, -0.26]
+              line, idx, position: [0.28, at - idx, -0.26]
             }))
             .filter(({position: [x, y, z]}) => y > 1 && y < 5)
             .map(({line, position, idx}) =>
-              <a-entity key={idx} position={position.join(' ')} scale="5 5 5" text={`value: ${line}; lineHeight: 50px; opacity: 0.5`} />
+              <a-entity key={idx} position={position.join(' ')} geometry="primitive: plane; width: 100" material="side: double; transparent: true; opacity: 0; color: #EF2D5E" /*scale="5 5 5"*/ text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`} />
             )
           }
         </a-scene>
