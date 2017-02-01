@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles';
 // import BasicSingleLineInput from '../BasicSingleLineInput';
-// import InitialLoading from '../InitialLoading';
+import InitialLoading from '../InitialLoading';
 //import {Entity, Scene} from 'aframe-react';
 import {speech} from '../../../../public/speech-line-test-data.js'
 
@@ -28,9 +28,22 @@ export default class VRViewer extends Component {
   render () {
     const { handleSubmit, isInitialized } = this.props;
     const { at } = this.state
+    const scene = document.querySelector('a-scene');
+
     return (
       <div>
         <a-scene>
+
+        {/* Make the loading screen work!!
+
+          !scene.hasLoaded ?
+          <InitialLoading />
+          :
+
+
+
+        */}
+
           <a-assets>
             <video muted id="mvp" autoPlay loop src="DT_RNC.mp4" />
           </a-assets>
