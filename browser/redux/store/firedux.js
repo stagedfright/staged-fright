@@ -1,5 +1,11 @@
-import Firedux from 'firedux'
-import firebase from 'firebase'
+import Firedux from 'firedux';
+import firebase from 'firebase';
+import randomWords from 'random-words';
+
+// Tracker, no tracking!!!
+window.FIREDUX_OPTIONS = {
+  noTrack: true
+};
 
 let session = (() => {
   const match = (window.location.search || '').match(/s=([^&]*)/)
@@ -7,7 +13,7 @@ let session = (() => {
 })()
 
 session = session ? session : (() => {
-  return (new Date()).getTime() + '-' + Math.floor((Math.random()*100000))
+  return randomWords() + Math.floor(Math.random() * 100)
 })()
 
 const firebaseApp = firebase.initializeApp({
@@ -21,6 +27,6 @@ const ref = rootRef.child(`sessions/${session}`)
 
 const firedux = new Firedux({
   ref
-})
+});
 
 export default firedux

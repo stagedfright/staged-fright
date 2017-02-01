@@ -1,39 +1,35 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-import { changeWelcomeText, changeLines } from '../../redux/action-creators';
+// import { changeWelcomeText, changeLines } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
-  speechLines: state.get('speechLines').toArray(),
-  // speechLines,
-  wpm: state.get('wpm'),
-  prevLine: state.get('prevLine'),
-  currentLine: state.get('currentLine'),
-  nextLine: state.get('nextLine'),
-  isInitialized: state.get('isInitialized')
+  speechLines: state.get('data').speechData.speechLines,
+  wpm: state.get('data').speechData.wpm,
+  // isInitialized: state.get('isInitialized')
 });
 
 // Handles the enter key changing the welcomeText.
-const mapDispatchToProps = dispatch => ({
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-    dispatch(changeWelcomeText(evt.target.textField.value));
-    evt.target.textField.value = '';
-  }
+// const mapDispatchToProps = dispatch => ({
+//   // handleSubmit: (evt) => {
+//   //   evt.preventDefault();
+//   //   dispatch(changeWelcomeText(evt.target.textField.value));
+//   //   evt.target.textField.value = '';
+//   // }
 
-  // scrollLines: (wpm, numOfLines) => {
-  //   var interval = Math.floor((60 / (wpm / 7)) * 1000);
-  //   var counter = 0;
-  //   var scroller = setInterval(function() {
-  //     dispatch(changeLines());
-  //     if (++counter === numOfLines - 3) {
-  //       window.clearInterval(scroller);
-  //     }
-  //   }, interval);
-  // }
+//   // scrollLines: (wpm, numOfLines) => {
+//   //   var interval = Math.floor((60 / (wpm / 7)) * 1000);
+//   //   var counter = 0;
+//   //   var scroller = setInterval(function() {
+//   //     dispatch(changeLines());
+//   //     if (++counter === numOfLines - 3) {
+//   //       window.clearInterval(scroller);
+//   //     }
+//   //   }, interval);
+//   // }
 
-});
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VRViewer);
+export default connect(mapStateToProps, null)(VRViewer);
 
 // const speechLines = `
 // I am happy to join with you today in what will go down in history as the greatest demonstration for freedom in the history of our nation.
