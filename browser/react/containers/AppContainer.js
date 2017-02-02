@@ -1,10 +1,6 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 // import { changeWelcomeText, changeLines } from '../../redux/action-creators';
-=======
-import { changeLines, finishRecording } from '../../redux/action-creators';
->>>>>>> audio-stream-#27
 
 const mapStateToProps = state => ({
   speechLines: state.get('data').speechData.speechLines,
@@ -12,7 +8,6 @@ const mapStateToProps = state => ({
   // isInitialized: state.get('isInitialized')
 });
 
-<<<<<<< HEAD
 // Handles the enter key changing the welcomeText.
 // const mapDispatchToProps = dispatch => ({
 //   // handleSubmit: (evt) => {
@@ -33,25 +28,6 @@ const mapStateToProps = state => ({
 //   // }
 
 // });
-=======
-const mapDispatchToProps = dispatch => ({
-  showSummary: () => {
-    dispatch(finishRecording);
-  }
-})
-  // scrollLines: (wpm, numOfLines) => {
-  //   var interval = Math.floor((60 / (wpm / 7)) * 1000);
-  //   var counter = 0;
-  //   var scroller = setInterval(function() {
-  //     dispatch(changeLines());
-  //     if (++counter === numOfLines - 3) {
-  //       window.clearInterval(scroller);
-  //     }
-  //   }, interval);
-  // }
-
-
->>>>>>> audio-stream-#27
 
 export default connect(mapStateToProps, null)(VRViewer);
 

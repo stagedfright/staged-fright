@@ -12,7 +12,6 @@ import firedux from '../redux/store/firedux';
 
 import { AppContainer, NewSpeechFormContainer, Container } from './containers';
 import SplashScreen from './components/SplashScreen';
-import SummaryView from './components/SummaryViewer';
 import 'aframe';
 
 
@@ -26,7 +25,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
         'locationBeforeTransitions': state.get('locationBeforeTransitions')
       }
   }
-<<<<<<< HEAD
 });
 
 // const SessionProvider = function({routeParams: {sessionKey}, children}) {
@@ -51,25 +49,3 @@ firedux.watch('speechData')
 .then(render)
 .catch(console.log);
 
-=======
-})
-
-/*
-  Provider = react-redux supplying context of store.
-  Mui = materialize-ui providing a default theme for itself.
-  Router = react-router
-*/
-ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider>
-      <Router history={history}>
-        <Route path='/' component={SplashScreen} />
-        <Route path='/new-speech' component={NewSpeechFormContainer} />
-        <Route path='/practice' component={AppContainer} />
-        <Route path='/summary' component={SummaryView} />
-      </Router>
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('react-app')
-);
->>>>>>> audio-stream-#27
