@@ -24,11 +24,19 @@ export const submitSpeechData = fields => dispatch => {
   dispatch(push(`/${sessionKey}/practice`));
 };
 
+<<<<<<< HEAD
 //TODO
 // export const clearSpeechData =() =>
 //   (dispatch) => {
 //     firedux.get('speechData')
 //       .then(({snapshot}) => console.log(snapshot.val))
+=======
+export const finishRecording = dispatch => {
+  dispatch(push('/summary'));
+};
+
+export const changeLines = () => ({ type: SET_DISPLAY_LINES });
+>>>>>>> audio-stream-#27
 
 //     // _.each(speechData, (sd, id) => firedux.remove(`speechData/${id}`));
 //   }
