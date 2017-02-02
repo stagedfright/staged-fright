@@ -14,7 +14,7 @@ function createSessionKey() {
 let session = (() => {
   const currentSession = window.location.pathname.split("/")[1]
   if(!currentSession) {
-    window.location.pathname = createSessionKey()
+    window.location.pathname = `${createSessionKey()}/home`
   }
   return currentSession
 })()

@@ -18,7 +18,7 @@ export default class SplashScreen extends Component {
 	componentWillMount() {
         const script = document.createElement('script');
 
-        script.src = 'video-resize.js';
+        script.src = '/video-resize.js';
         script.async = true;
 
         document.body.appendChild(script);
@@ -32,7 +32,7 @@ export default class SplashScreen extends Component {
 				<h1 style={styles.overlayTextBig}>
 					Choose StagedFright®
 				</h1>
-				<Link to={`${this.props.params.sessionKey}/new-speech`}>
+				<Link to={`/${this.props.params.sessionKey}/new-speech`}>
 					<MyRaisedButton/>
 				</Link>
 			</div>;
@@ -52,7 +52,7 @@ export default class SplashScreen extends Component {
 			    	id='background-video'
 			    	loop muted autoPlay>
 			        <source
-			        	src='openingvid.mp4'
+			        	src='/openingvid.mp4'
 			        	type='video/mp4'/>
 			        Your browser does not support the video tag.
 			    </video>

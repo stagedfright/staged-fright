@@ -7,6 +7,8 @@ import axios from 'axios';
 import { push } from 'react-router-redux';
 import firedux from '../store/firedux';
 
+const sessionKey = firedux.ref.key;
+
 const createInitialized = () => ({
   type: SET_INITIALIZED
 });
@@ -19,7 +21,7 @@ const setSpeechData = ({ wpm, speechLines }) => ({
 
 export const submitSpeechData = fields => dispatch => {
   firedux.set('speechData', fields);
-  dispatch(push('practice'));
+  dispatch(push(`/${sessionKey}/practice`));
 };
 
 //TODO
