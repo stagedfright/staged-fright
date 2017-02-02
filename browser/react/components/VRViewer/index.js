@@ -23,7 +23,7 @@ export default class VRViewer extends Component {
 
     console.log('HEY THE RECORDING FUNCTION STARTED');
 
-    navigator.getUserMedia = (navigator.getUserMedia ||
+    navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
       navigator.webkitGetUserMedia ||
       navigator.mozGetUserMedia ||
       navigator.msGetUserMedia);
@@ -37,26 +37,17 @@ export default class VRViewer extends Component {
     analyser.maxDecibels = -10;
     analyser.smoothingTimeConstant = 0.85;
 
-    if (navigator.getUserMedia) {
+    if (navigator.mediaDevices.getUserMedia) {
        console.log('getUserMedia supported.');
-       navigator.getUserMedia(
-        // constraints
-        { audio: true },
-        // success cb
-        (stream) => {
+       navigator.mediaDevices.getUserMedia({ audio: true })
+       .then((stream) => {
           this.stream = stream
           //connect audio context to the stream we created
            source = audioCtx.createMediaStreamSource(stream);
            source.connect(analyser);
            this.streamToStore(analyser);
-        },
-        // error cb
-        function(err) {
-           console.log('Error getting UserMedia: ' + err);
-        }
-      );
-    } else {
-       console.log('getUserMedia not supported on your browser!');
+        })
+       .catch(e => console.error('getUserMedia() failed: ' + e))
     }
   }
 

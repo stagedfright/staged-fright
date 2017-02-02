@@ -12,12 +12,11 @@ const mapStateToProps = state => ({
   isInitialized: state.get('isInitialized')
 });
 
-// Handles the enter key changing the welcomeText.
 const mapDispatchToProps = dispatch => ({
   showSummary: () => {
     dispatch(finishRecording);
   }
-
+})
   // scrollLines: (wpm, numOfLines) => {
   //   var interval = Math.floor((60 / (wpm / 7)) * 1000);
   //   var counter = 0;
@@ -29,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
   //   }, interval);
   // }
 
-});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(VRViewer);
 
