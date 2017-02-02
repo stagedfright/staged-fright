@@ -9,41 +9,86 @@ export default class VRViewer extends Component {
 
   constructor(props) {
     super(props);
-    console.log("PROPS", props);
-    this.state = {at: 0, time: window.performance.now(), stream:[]}
-
+    this.state = {
+      at: 0, 
+      time: window.performance.now(), 
+      stream:[]
+    };
     this.startRecording = this.startRecording.bind(this);
-
   }
 
   startRecording() {
+
     console.log('HEY THE RECORDING FUNCTION STARTED');
 
-    navigator.mediaDevices.getUserMedia({audio: true})
-    .then((stream) => {
-      console.log('THIS IS THE CONTEXT ', this)
-      console.log('THIS IS THE STREAM ', stream)
-      this.setState({stream});
-      return setTimeout(() => {stream.getAudioTracks().forEach((track, idx) => {
-        console.log('THIS IS THE TRACK ON THE STREAM ', track);
-        track.stop();
-        console.log(`TRACK ${idx} STOPPED`);
-      })}, 10000);
-    })
-    .then(() => {
-      console.log('IS THIS THE SAME STREAM???? ', this.state.stream)
-      this.state.stream.onended = function() {
-      console.log('THE STREAM HAS ENDED YOU GUYS');
-    }})
-    .catch(console.err(err))
+    navigator.getUserMedia = (navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
+
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var source;
+    var stream;
+
+    var analyser = audioCtx.createAnalyser();
+    analyser.minDecibels = -90;
+    analyser.maxDecibels = -10;
+    analyser.smoothingTimeConstant = 0.85;
+
+    var pollData;
+    
+    if (navigator.getUserMedia) {
+       console.log('getUserMedia supported.');
+       navigator.getUserMedia(
+        // constraints 
+        { audio: true },
+        // success cb
+        function(stream) {
+          //connect audio context to the stream we created
+           source = audioCtx.createMediaStreamSource(stream);
+           source.connect(analyser);
+           streamToStore();
+        },
+        // error cb
+        function(err) {
+           console.log('Error getting UserMedia: ' + err);
+        }
+      );
+    } else {
+       console.log('getUserMedia not supported on your browser!');
+    }
+
+    function streamToStore() {
+
+          analyser.fftSize = 2048;
+          // the AnalyserNode.frequencyBinCount value is half the fft
+          // & = how many data pts we collect for that buffer size 
+          var bufferLength = analyser.frequencyBinCount;
+          console.log(bufferLength);
+
+          // instantiate an unsigned 8-bit integer array to hold our values 
+          var dataArray = new Uint8Array(bufferLength);
+
+          function poll() {
+            // loops and gets the data continuously over time
+            pollData = requestAnimationFrame(poll);
+              //TODO: on leaving the page, call
+              //window.cancelAnimationFrame(pollData);
+            
+            // fill the array with the current sine wave for the point in time polled
+            analyser.getByteTimeDomainData(dataArray);
+            console.log(dataArray);
+
+          };
+
+          // starts the loop off; it will run continuously from here
+          poll();
+      }
   }
 
   componentDidMount () {
-    // this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
     this.tick(window.performance.now());
-
     setTimeout(this.startRecording, 5000)
-
   }
 
   tick = time => {
@@ -107,11 +152,6 @@ export default class VRViewer extends Component {
     );
   }
 }
-
-
-
-
-
 
 VRViewer.defaultProps = {
   handleSubmit: () => {
