@@ -7,14 +7,13 @@ import store from '../redux/store';
 window.store = store;
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, push } from 'react-router-redux';
+import firedux from '../redux/store/firedux';
 
-import { AppContainer, NewSpeechFormContainer } from './containers';
+import { AppContainer, NewSpeechFormContainer, Container } from './containers';
 import SplashScreen from './components/SplashScreen';
 import 'aframe';
-// import 'aframe-bmfont-text-component';
 
-import SOCKET from '../sockets';
 
 // Hack for mobile support for materialize-ui
 injectTapEventPlugin();
@@ -26,22 +25,27 @@ const history = syncHistoryWithStore(browserHistory, store, {
         'locationBeforeTransitions': state.get('locationBeforeTransitions')
       }
   }
-})
+});
 
-/*
-  Provider = react-redux supplying context of store.
-  Mui = materialize-ui providing a default theme for itself.
-  Router = react-router
-*/
-ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider>
-      <Router history={history}>
-        <Route path='/' component={SplashScreen} />
-        <Route path='/new-speech' component={NewSpeechFormContainer} />
-        <Route path='/practice' component={AppContainer} />
-      </Router>
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('react-app')
-);
+// const SessionProvider = function({routeParams: {sessionKey}, children}) {
+//   return <Provider store={store}> {...children} </Provider>
+// }
+
+const render = () =>
+  ReactDOM.render(
+      <MuiThemeProvider>
+      <Provider store={store}>
+        <Router history={history}>
+          <Route path='/:sessionKey/home' component={SplashScreen} />
+          <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
+          <Route path='/:sessionKey/practice' component={AppContainer} />
+        </Router>
+      </Provider>
+      </MuiThemeProvider>,
+    document.getElementById('react-app')
+  );
+
+firedux.watch('speechData')
+.then(render)
+.catch(console.log);
+
