@@ -3,9 +3,9 @@ import { fetchWelcomeText } from '../redux/action-creators';
 import store from '../redux/store';
 const socket = io.connect();
 
-const fetchText = () => {
-  store.dispatch(fetchWelcomeText());
-};
+// const fetchText = () => {
+//   store.dispatch(fetchWelcomeText());
+// };
 
 // Redirect a user.
 // socket.on('KickTroll', () => {
@@ -13,8 +13,8 @@ const fetchText = () => {
 // });
 
 // After we have initialized a user, lets get their information again.
-socket.on('InitUser', () => {
-  fetchText();
-});
+// socket.on('InitUser', () => {
+//   fetchText();
+// });
 
 export default socket;

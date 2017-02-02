@@ -10,12 +10,40 @@ export default class VRViewer extends Component {
   constructor(props) {
     super(props);
     console.log("PROPS", props);
-    this.state = {at: 0, time: window.performance.now()}
+    this.state = {at: 0, time: window.performance.now(), stream:[]}
+
+    this.startRecording = this.startRecording.bind(this);
+
+  }
+
+  startRecording() {
+    console.log('HEY THE RECORDING FUNCTION STARTED');
+
+    navigator.mediaDevices.getUserMedia({audio: true})
+    .then((stream) => {
+      console.log('THIS IS THE CONTEXT ', this)
+      console.log('THIS IS THE STREAM ', stream)
+      this.setState({stream});
+      return setTimeout(() => {stream.getAudioTracks().forEach((track, idx) => {
+        console.log('THIS IS THE TRACK ON THE STREAM ', track);
+        track.stop();
+        console.log(`TRACK ${idx} STOPPED`);
+      })}, 10000);
+    })
+    .then(() => {
+      console.log('IS THIS THE SAME STREAM???? ', this.state.stream)
+      this.state.stream.onended = function() {
+      console.log('THE STREAM HAS ENDED YOU GUYS');
+    }})
+    .catch(console.err(err))
   }
 
   componentDidMount () {
     // this.props.scrollLines(this.props.wpm, this.props.speechLines.length)
-    this.tick(window.performance.now())
+    this.tick(window.performance.now());
+
+    setTimeout(this.startRecording, 5000)
+
   }
 
   tick = time => {
