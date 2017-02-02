@@ -21,6 +21,8 @@ const store = createStore(
   routerReducer
 );
 
+
+
 firedux.dispatch = store.dispatch
 
 export default store

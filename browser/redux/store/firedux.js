@@ -7,13 +7,16 @@ window.FIREDUX_OPTIONS = {
   noTrack: true
 };
 
-let session = (() => {
-  const match = (window.location.search || '').match(/s=([^&]*)/)
-  return match ? match[1] : null
-})()
-
-session = session ? session : (() => {
+function createSessionKey() {
   return randomWords() + Math.floor(Math.random() * 100)
+}
+
+let session = (() => {
+  const currentSession = window.location.pathname.split("/")[1]
+  if(!currentSession) {
+    window.location.pathname = createSessionKey()
+  }
+  return currentSession
 })()
 
 const firebaseApp = firebase.initializeApp({

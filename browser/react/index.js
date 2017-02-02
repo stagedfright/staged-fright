@@ -7,12 +7,13 @@ import store from '../redux/store';
 window.store = store;
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, push } from 'react-router-redux';
 import firedux from '../redux/store/firedux';
 
 import { AppContainer, NewSpeechFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
 import 'aframe';
+
 
 // Hack for mobile support for materialize-ui
 injectTapEventPlugin();
@@ -26,17 +27,21 @@ const history = syncHistoryWithStore(browserHistory, store, {
   }
 });
 
-const render = () => 
+// const SessionProvider = function({routeParams: {sessionKey}, children}) {
+//   return <Provider store={store}> {...children} </Provider>
+// }
+
+const render = () =>
   ReactDOM.render(
-    <Provider store={store}>
       <MuiThemeProvider>
+      <Provider store={store}>
         <Router history={history}>
-          <Route path='/' component={SplashScreen} />
-          <Route path='/new-speech' component={NewSpeechFormContainer} />
-          <Route path='/practice' component={AppContainer} />
+          <Route path='/:sessionKey' component={SplashScreen} />
+          <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
+          <Route path='/:sessionKey/practice' component={AppContainer} />
         </Router>
-      </MuiThemeProvider>
-    </Provider>,
+      </Provider>
+      </MuiThemeProvider>,
     document.getElementById('react-app')
   );
 

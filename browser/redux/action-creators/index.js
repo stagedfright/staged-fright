@@ -19,11 +19,11 @@ const setSpeechData = ({ wpm, speechLines }) => ({
 
 export const submitSpeechData = fields => dispatch => {
   firedux.set('speechData', fields);
-  dispatch(push('/practice'));
+  dispatch(push('practice'));
 };
 
 //TODO
-// export const clearSpeechData =() => 
+// export const clearSpeechData =() =>
 //   (dispatch) => {
 //     firedux.get('speechData')
 //       .then(({snapshot}) => console.log(snapshot.val))

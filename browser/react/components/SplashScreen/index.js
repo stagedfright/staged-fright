@@ -25,17 +25,18 @@ export default class SplashScreen extends Component {
     }
 
     render() {
-    	let overlayText = null; 
-		if (this.state.showMe) overlayText = 
+
+    let overlayText = null;
+		if (this.state.showMe) overlayText =
 			<div style={styles.overlayText}>
 				<h1 style={styles.overlayTextBig}>
 					Choose StagedFright®
 				</h1>
-				<Link to="/new-speech">
+				<Link to={`${this.props.params.sessionKey}/new-speech`}>
 					<MyRaisedButton/>
 				</Link>
 			</div>;
-		else overlayText = 
+		else overlayText =
 			<a href="#" style={styles.overlayText}>
 				<h1 style={styles.overlayTextBig}>
 					Conquer stage fright.
@@ -44,24 +45,24 @@ export default class SplashScreen extends Component {
 			</a>;
 
     	return (
-			<div id='container' 
+			<div id='container'
 				style={styles.container}>
-			    <video 
-			    	style={styles.video} 
-			    	id='background-video' 
+			    <video
+			    	style={styles.video}
+			    	id='background-video'
 			    	loop muted autoPlay>
-			        <source 
-			        	src='openingvid.mp4' 
+			        <source
+			        	src='openingvid.mp4'
 			        	type='video/mp4'/>
 			        Your browser does not support the video tag.
 			    </video>
-			    <div id='overlay' 
-			    	onClick={this.onClick} 
-			    	className='center' 
+			    <div id='overlay'
+			    	onClick={this.onClick}
+			    	className='center'
 			    	style={styles.overlay}>
 				    {overlayText}
 			    </div>
 			</div>
 			)
     	}
-    };	
+    };
