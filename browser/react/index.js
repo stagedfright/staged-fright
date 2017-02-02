@@ -26,12 +26,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
         'locationBeforeTransitions': state.get('locationBeforeTransitions')
       }
   }
-<<<<<<< HEAD
 });
-
-// const SessionProvider = function({routeParams: {sessionKey}, children}) {
-//   return <Provider store={store}> {...children} </Provider>
-// }
 
 const render = () =>
   ReactDOM.render(
@@ -41,6 +36,7 @@ const render = () =>
           <Route path='/:sessionKey/home' component={SplashScreen} />
           <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
           <Route path='/:sessionKey/practice' component={AppContainer} />
+          <Route path='/:sessionKey/summary' component={SummaryView} />
         </Router>
       </Provider>
       </MuiThemeProvider>,
@@ -50,26 +46,3 @@ const render = () =>
 firedux.watch('speechData')
 .then(render)
 .catch(console.log);
-
-=======
-})
-
-/*
-  Provider = react-redux supplying context of store.
-  Mui = materialize-ui providing a default theme for itself.
-  Router = react-router
-*/
-ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider>
-      <Router history={history}>
-        <Route path='/' component={SplashScreen} />
-        <Route path='/new-speech' component={NewSpeechFormContainer} />
-        <Route path='/practice' component={AppContainer} />
-        <Route path='/summary' component={SummaryView} />
-      </Router>
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('react-app')
-);
->>>>>>> audio-stream-#27
