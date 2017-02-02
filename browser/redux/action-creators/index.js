@@ -27,6 +27,10 @@ export const submitSpeechData = fields => dispatch => {
   dispatch(push('/practice'));
 };
 
+export const finishRecording = dispatch => {
+  dispatch(push('/summary'));
+};
+
 export const changeLines = () => ({ type: SET_DISPLAY_LINES });
 
 // Used by the front end to live change the welcomeText.

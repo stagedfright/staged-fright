@@ -1,6 +1,6 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-import { changeWelcomeText, changeLines } from '../../redux/action-creators';
+import { changeLines, finishRecording } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
   speechLines: state.get('speechLines').toArray(),
@@ -14,10 +14,8 @@ const mapStateToProps = state => ({
 
 // Handles the enter key changing the welcomeText.
 const mapDispatchToProps = dispatch => ({
-  handleSubmit: (evt) => {
-    evt.preventDefault();
-    dispatch(changeWelcomeText(evt.target.textField.value));
-    evt.target.textField.value = '';
+  showSummary: () => {
+    dispatch(finishRecording);
   }
 
   // scrollLines: (wpm, numOfLines) => {

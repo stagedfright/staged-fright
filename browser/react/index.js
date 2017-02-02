@@ -11,6 +11,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import { AppContainer, NewSpeechFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
+import SummaryView from './components/SummaryViewer';
 import 'aframe';
 // import 'aframe-bmfont-text-component';
 
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Route path='/' component={SplashScreen} />
         <Route path='/new-speech' component={NewSpeechFormContainer} />
         <Route path='/practice' component={AppContainer} />
+        <Route path='/summary' component={SummaryView} />
       </Router>
     </MuiThemeProvider>
   </Provider>,
