@@ -15,13 +15,23 @@ export default class VRViewer extends Component {
       time: window.performance.now(),
       loading: true,
       loudness: 0,
+      overrideVR: false,
     }
 
     this.meterInterval = null
 
     this.startRecording = this.startRecording.bind(this);
+    this.override = this.override.bind(this);
     // this.streamToStore = this.streamToStore.bind(this);
   }
+
+  override() {
+    this.setState({
+      overrideVR: true
+    });
+    this.forceUpdate();
+  }
+
 
   startRecording() {
     navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
@@ -129,7 +139,7 @@ export default class VRViewer extends Component {
       }
     }
 
-    // if (navigator.userAgent.match('Mobi')) {
+    if (this.state.overrideVR || navigator.userAgent.match('Mobi')) {
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -178,7 +188,7 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    // } else return <DesktopVRView />
+    } else return <DesktopVRView override={this.override}/>
   }
 }
 
