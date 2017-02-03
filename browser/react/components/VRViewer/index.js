@@ -3,6 +3,7 @@ import styles from './styles';
 import InitialLoading from '../InitialLoading';
 import DesktopVRView from '../DesktopVRView';
 import {speech} from '../../../../public/speech-line-test-data.js';
+import { SoundMeter } from './utils/loudness';
 
 export default class VRViewer extends Component {
 
@@ -13,9 +14,10 @@ export default class VRViewer extends Component {
       at: 0, 
       time: window.performance.now(),
       loading: true,
+      loudness: 0,
     }
     this.startRecording = this.startRecording.bind(this);
-    this.streamToStore = this.streamToStore.bind(this);
+    // this.streamToStore = this.streamToStore.bind(this);
   }
 
   startRecording() {
@@ -37,38 +39,53 @@ export default class VRViewer extends Component {
        navigator.mediaDevices.getUserMedia({ audio: true })
        .then((stream) => {
           this.stream = stream
-          //connect audio context to the stream we created
-           source = audioCtx.createMediaStreamSource(stream);
-           source.connect(analyser);
-           this.streamToStore(analyser);
+          var soundMeter = window.soundMeter = new SoundMeter(audioCtx);
+                soundMeter.connectToSource(stream, (e) => {
+                  if (e) {
+                    alert(e);
+                    return;
+                  }
+                  setInterval(() => {
+                    console.log(soundMeter.instant.toFixed(2));
+                    this.setState({ 
+                      loudness: soundMeter.slow.toFixed(2) 
+                    });
+                    console.log('slow', soundMeter.slow.toFixed(2));
+                    console.log(soundMeter.clip);
+                  }, 200);
+                });
+            //connect audio context to the stream we created
+             // source = audioCtx.createMediaStreamSource(stream);
+             // source.connect(analyser);
+             // this.streamToStore(analyser);
         })
        .catch(e => console.error('getUserMedia() failed: ' + e))
     }
   }
 
 
-streamToStore(analyser) {
+// streamToStore(analyser) {
 
-  analyser.fftSize = 2048;
-  // the AnalyserNode.frequencyBinCount value is half the fft
-  // & = how many data pts we collect for that buffer size
-  var bufferLength = analyser.frequencyBinCount;
+//   analyser.fftSize = 2048;
+//   // the AnalyserNode.frequencyBinCount value is half the fft
+//   // & = how many data pts we collect for that buffer size
+//   var bufferLength = analyser.frequencyBinCount;
 
-  // instantiate an unsigned 8-bit integer array to hold our values
-  var dataArray = new Uint8Array(bufferLength);
+//   // instantiate an unsigned 8-bit integer array to hold our values
+//   var dataArray = new Uint8Array(bufferLength);
 
-  var poll = () => {
-    // loops and gets the data continuously over time
-    this.pollRafId = requestAnimationFrame(poll);
+//   var poll = () => {
+//     // loops and gets the data continuously over time
+//     this.pollRafId = requestAnimationFrame(poll);
 
-    // fill the array with the current sine wave for the point in time polled
-    analyser.getByteTimeDomainData(dataArray);
-    //console.log(dataArray);
-  };
+//     // fill the array with the current sine wave for the point in time polled
+//     analyser.getByteTimeDomainData(dataArray);
+//     //console.log(dataArray);
+//   };
 
-  // starts the loop off; it will run continuously from here
-  poll();
-}
+//   // starts the loop off; it will run continuously from here
+//   poll();
+// }
 
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 1500); 
