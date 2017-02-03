@@ -94,14 +94,14 @@ export default class VRViewer extends Component {
     setTimeout(() => this.setState({ loading: false }), 1500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, 4000)
-    setTimeout(this.props.showSummary, 8000)
+    // setTimeout(this.props.showSummary, 8000)
   }
 
   componentWillUnmount () {
     cancelAnimationFrame(this.pollRafId);
     cancelAnimationFrame(this.tickRafId)
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
-    // soundMeter.stop();
+    soundMeter.stop();
     clearInterval(this.meterInterval);
   }
 
@@ -121,8 +121,8 @@ export default class VRViewer extends Component {
       if (loading) {
         return <InitialLoading />;
       } else return (
-        <div>
-          <a-scene>
+        <div style={styles.container}>
+          <a-scene auto-enter-vr="false">
             <a-assets>
               <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
             </a-assets>
