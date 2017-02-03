@@ -2,24 +2,22 @@ import React, { Component } from 'react';
 import styles from './styles';
 import InitialLoading from '../InitialLoading';
 import DesktopVRView from '../DesktopVRView';
-import {speech} from '../../../../public/speech-line-test-data.js';
+import { speech } from '../../../../public/speech-line-test-data.js';
 import { SoundMeter } from './utils/loudness';
 
 export default class VRViewer extends Component {
 
   constructor(props) {
     super(props);
-    // console.log("PROPS", props);
     this.state = {
       at: 0,
       time: window.performance.now(),
       loading: true,
-      loudness: 0,
       overrideVR: false,
     }
 
-    this.meterInterval = null
-
+    this.meterInterval = null;
+    this.speechLines = this.props.speechLines;
     this.startRecording = this.startRecording.bind(this);
     this.override = this.override.bind(this);
     // this.streamToStore = this.streamToStore.bind(this);
@@ -59,12 +57,8 @@ export default class VRViewer extends Component {
                     return;
                   }
                   this.meterInterval = setInterval(() => {
-                    // console.log("THIS IS THE INSTANT meter: ", soundMeter.instant.toFixed(2));
-                    this.setState({
-                      loudness: soundMeter.slow.toFixed(2)
-                    });
-                    console.log('THIS IS THE SLOW MEEETER', soundMeter.slow.toFixed(2));
-                  //   console.log('THIS IS THE SOUND CLIP:', soundMeter.clip);
+                    const loudness = soundMeter.slow.toFixed(2);
+                    this.props.syncLoudness(loudness);
                   }, 200);
                 });
             //connect audio context to the stream we created
@@ -112,7 +106,7 @@ export default class VRViewer extends Component {
     cancelAnimationFrame(this.pollRafId);
     cancelAnimationFrame(this.tickRafId)
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
-    // soundMeter.stop();
+    soundMeter.stop();
     clearInterval(this.meterInterval);
   }
 
@@ -127,8 +121,7 @@ export default class VRViewer extends Component {
     const { handleSubmit, isInitialized } = this.props;
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
-    var volume = this.state.loudness * 30;
-
+    var volume = this.props.loudness * 30;
     function colorChange(volume) {
       if (volume < 2.1) {
         return `#FF0000`
@@ -170,15 +163,17 @@ export default class VRViewer extends Component {
                     depth="0.2"
                     height={volume}
                     width=".7"
-                    anchor="bottom"></a-box>
+                    anchor="bottom">
+              </a-box>
             {
-              this.props.speechLines
+              this.speechLines
               .map((line, idx) => ({
                 line, idx, position: [0.28, at - idx, -0.26]
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <a-entity key={ idx }
+                <a-entity 
+                key={ idx }
                 position={ position.join(' ') }
                 geometry="primitive: plane; width: 100"
                 material="side: double; transparent: true; opacity: 0; color: #EF2D5E" /*scale="5 5 5"*/

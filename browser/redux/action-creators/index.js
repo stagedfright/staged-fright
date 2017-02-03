@@ -24,6 +24,10 @@ export const submitSpeechData = fields => dispatch => {
   dispatch(push(`/${sessionKey}/practice`));
 };
 
+export const updateLoudness = loudness => dispatch => {
+  firedux.update('speechData', { loudness });
+};
+
 export const finishRecording = dispatch => {
   dispatch(push(`/${sessionKey}/summary`));
 };
