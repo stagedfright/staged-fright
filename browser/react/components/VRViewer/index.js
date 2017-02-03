@@ -13,13 +13,23 @@ export default class VRViewer extends Component {
       at: 0,
       time: window.performance.now(),
       loading: true,
+      overrideVR: false,
     }
 
     this.meterInterval = null;
     this.speechLines = this.props.speechLines;
     this.startRecording = this.startRecording.bind(this);
+    this.override = this.override.bind(this);
     // this.streamToStore = this.streamToStore.bind(this);
   }
+
+  override() {
+    this.setState({
+      overrideVR: true
+    });
+    this.forceUpdate();
+  }
+
 
   startRecording() {
     navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
@@ -111,7 +121,18 @@ export default class VRViewer extends Component {
     const { handleSubmit, isInitialized } = this.props;
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
-    if (navigator.userAgent.match('Mobi')) {
+    var volume = this.props.loudness * 30;
+    function colorChange(volume) {
+      if (volume < 2.1) {
+        return `#FF0000`
+      } else if (volume < 3.6) {
+        return `#FFFF00`
+      } else {
+        return `#00FF00`
+      }
+    }
+
+    if (this.state.overrideVR || navigator.userAgent.match('Mobi')) {
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -125,23 +146,25 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <a-box 
-              color="gray" 
-              position="-7.38 0.88 -4.53" 
-              rotation="0 7.42 0" 
-              depth="0.2" 
-              height="6" 
-              width=".7">
+            <a-box  color="gray"
+                    position="-7.38 0.88 -4.53"
+                    rotation="0 7.42 0"
+                    depth="0.2"
+                    height="6"
+                    width=".7">
             </a-box>
-            <a-box 
-              color="tomato" 
-              position={`-7.38 ${-2.12 + (this.props.loudness * 30)/2} -4.32`} 
-              rotation="0 7.42 0" 
-              depth="0.2" 
-              height={this.props.loudness * 30} 
-              width=".7" 
-              anchor="bottom">
-            </a-box>
+            <a-box  color={colorChange(volume)}
+                    position={`
+                      -7.38
+                      ${-2.12 + volume/2}
+                      -4.32
+                    `}
+                    rotation="0 7.42 0"
+                    depth="0.2"
+                    height={volume}
+                    width=".7"
+                    anchor="bottom">
+              </a-box>
             {
               this.speechLines
               .map((line, idx) => ({
@@ -160,7 +183,7 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    } else return <DesktopVRView />
+    } else return <DesktopVRView override={this.override}/>
   }
 }
 
