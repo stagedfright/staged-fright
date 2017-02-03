@@ -1,12 +1,12 @@
 {
-  "name": "meme-magic",
+  "name": "staged-fright",
   "version": "0.0.1",
-  "description": "A medium sized back-end boiler plate, with very little done on the front.",
+  "description": "A VR application to practice public speaking",
   "main": "app.js",
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html babelify.js"
   },
-  "author": "Eliot Szwajkowski",
+  "author": "Staged-Fright Team",
   "license": "ISC",
   "dependencies": {
     "aframe": "github:aframevr/aframe",
