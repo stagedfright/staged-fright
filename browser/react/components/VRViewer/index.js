@@ -143,9 +143,14 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <a-box color="gray" position="-7.38 0.88 -4.53" rotation="0 7.42 0" depth="0.2" height="6" width=".7">
+            <a-box  color="gray"
+                    position="-7.38 0.88 -4.53"
+                    rotation="0 7.42 0"
+                    depth="0.2"
+                    height="6"
+                    width=".7">
             </a-box>
-            <a-box color={colorChange(volume)}
+            <a-box  color={colorChange(volume)}
                     position={`
                       -7.38
                       ${-2.12 + volume/2}
