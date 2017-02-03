@@ -1,22 +1,14 @@
 'use strict';
 
 import express from 'express';
-
-const app = express();
-import _db from './db/db';
 import chalk from 'chalk';
-
 import configServer from './configure';
-import configSessions from './sessions';
+const app = express();
+configServer(app);
 
-configServer(app, _db);
-configSessions(app);
-
-import Routes from './routes';
-
-app.use('/api', Routes);
 
 app.get('/*', (req, res) => {
+  console.log('got into app . get *');
   res.sendFile(app.getValue('indexPath'));
 });
 
