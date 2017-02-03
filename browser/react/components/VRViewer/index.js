@@ -49,12 +49,12 @@ export default class VRViewer extends Component {
                     return;
                   }
                   this.meterInterval = setInterval(() => {
-                    console.log("THIS IS THE INSTANT meter: ", soundMeter.instant.toFixed(2));
+                    // console.log("THIS IS THE INSTANT meter: ", soundMeter.instant.toFixed(2));
                     this.setState({
                       loudness: soundMeter.slow.toFixed(2)
                     });
                     console.log('THIS IS THE SLOW MEEETER', soundMeter.slow.toFixed(2));
-                    console.log('THIS IS THE SOUND CLIP:', soundMeter.clip);
+                  //   console.log('THIS IS THE SOUND CLIP:', soundMeter.clip);
                   }, 200);
                 });
             //connect audio context to the stream we created
@@ -118,7 +118,7 @@ export default class VRViewer extends Component {
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
 
-    if (navigator.userAgent.match('Mobi')) {
+    // if (navigator.userAgent.match('Mobi')) {
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -133,7 +133,7 @@ export default class VRViewer extends Component {
               </a-camera>
             </a-entity>
             <a-box color="gray" position="-7.38 0.88 -4.53" rotation="0 7.42 0" depth="0.2" height="6" width=".7"></a-box>
-            <a-box color="tomato" position="-7.38 0.88 -4.32" rotation="0 7.42 0" depth="0.2" height="6" width=".7" anchor="bottom"></a-box>
+            <a-box color="tomato" position={`-7.38 ${-2.12 + (this.state.loudness * 30)/2} -4.32`} rotation="0 7.42 0" depth="0.2" height={this.state.loudness * 30} width=".7" anchor="bottom"></a-box>
             {
               this.props.speechLines
               .map((line, idx) => ({
@@ -151,7 +151,7 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    } else return <DesktopVRView />
+    // } else return <DesktopVRView />
   }
 }
 
