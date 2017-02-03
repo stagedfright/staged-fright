@@ -136,8 +136,8 @@ export default class VRViewer extends Component {
       if (loading) {
         return <InitialLoading />;
       } else return (
-        <div>
-          <a-scene>
+        <div style={styles.container}>
+          <a-scene auto-enter-vr="false">
             <a-assets>
               <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
             </a-assets>
@@ -165,6 +165,11 @@ export default class VRViewer extends Component {
                     width=".7"
                     anchor="bottom">
               </a-box>
+            <a-entity position="-3.26 0.87 -4.24" 
+                      scale="10 10 10" 
+                      text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
+            </a-entity>
+
             {
               this.speechLines
               .map((line, idx) => ({
@@ -176,7 +181,7 @@ export default class VRViewer extends Component {
                 key={ idx }
                 position={ position.join(' ') }
                 geometry="primitive: plane; width: 100"
-                material="side: double; transparent: true; opacity: 0; color: #EF2D5E" /*scale="5 5 5"*/
+                material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
                 text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`} />
               )
             }
