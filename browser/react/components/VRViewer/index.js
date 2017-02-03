@@ -117,6 +117,17 @@ export default class VRViewer extends Component {
     const { handleSubmit, isInitialized } = this.props;
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
+    var volume = this.state.loudness * 30;
+
+    function colorChange(volume) {
+      if (volume < 2.1) {
+        return `#FF0000`
+      } else if (volume < 3.6) {
+        return `#FFFF00`
+      } else {
+        return `#00FF00`
+      }
+    }
 
     // if (navigator.userAgent.match('Mobi')) {
       if (loading) {
@@ -132,8 +143,19 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <a-box color="gray" position="-7.38 0.88 -4.53" rotation="0 7.42 0" depth="0.2" height="6" width=".7"></a-box>
-            <a-box color="tomato" position={`-7.38 ${-2.12 + (this.state.loudness * 30)/2} -4.32`} rotation="0 7.42 0" depth="0.2" height={this.state.loudness * 30} width=".7" anchor="bottom"></a-box>
+            <a-box color="gray" position="-7.38 0.88 -4.53" rotation="0 7.42 0" depth="0.2" height="6" width=".7">
+            </a-box>
+            <a-box color={colorChange(volume)}
+                    position={`
+                      -7.38
+                      ${-2.12 + volume/2}
+                      -4.32
+                    `}
+                    rotation="0 7.42 0"
+                    depth="0.2"
+                    height={volume}
+                    width=".7"
+                    anchor="bottom"></a-box>
             {
               this.props.speechLines
               .map((line, idx) => ({
