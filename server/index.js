@@ -8,7 +8,6 @@ configServer(app);
 
 
 app.get('/*', (req, res) => {
-  console.log('got into app . get *');
   res.sendFile(app.getValue('indexPath'));
 });
 
