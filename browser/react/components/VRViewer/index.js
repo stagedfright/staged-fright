@@ -11,11 +11,14 @@ export default class VRViewer extends Component {
     super(props);
     // console.log("PROPS", props);
     this.state = {
-      at: 0, 
+      at: 0,
       time: window.performance.now(),
       loading: true,
       loudness: 0,
     }
+
+    this.meterInterval = null
+
     this.startRecording = this.startRecording.bind(this);
     // this.streamToStore = this.streamToStore.bind(this);
   }
@@ -45,13 +48,13 @@ export default class VRViewer extends Component {
                     alert(e);
                     return;
                   }
-                  setInterval(() => {
-                    console.log(soundMeter.instant.toFixed(2));
-                    this.setState({ 
-                      loudness: soundMeter.slow.toFixed(2) 
+                  this.meterInterval = setInterval(() => {
+                    console.log("THIS IS THE INSTANT meter: ", soundMeter.instant.toFixed(2));
+                    this.setState({
+                      loudness: soundMeter.slow.toFixed(2)
                     });
-                    console.log('slow', soundMeter.slow.toFixed(2));
-                    console.log(soundMeter.clip);
+                    console.log('THIS IS THE SLOW MEEETER', soundMeter.slow.toFixed(2));
+                    console.log('THIS IS THE SOUND CLIP:', soundMeter.clip);
                   }, 200);
                 });
             //connect audio context to the stream we created
@@ -88,7 +91,7 @@ export default class VRViewer extends Component {
 // }
 
   componentDidMount () {
-    setTimeout(() => this.setState({ loading: false }), 1500); 
+    setTimeout(() => this.setState({ loading: false }), 1500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, 4000)
     setTimeout(this.props.showSummary, 8000)
@@ -98,6 +101,8 @@ export default class VRViewer extends Component {
     cancelAnimationFrame(this.pollRafId);
     cancelAnimationFrame(this.tickRafId)
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
+    // soundMeter.stop();
+    clearInterval(this.meterInterval);
   }
 
   tick = time => {
@@ -133,10 +138,10 @@ export default class VRViewer extends Component {
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <a-entity key={ idx } 
-                position={ position.join(' ') } 
-                geometry="primitive: plane; width: 100" 
-                material="side: double; transparent: true; opacity: 0; color: #EF2D5E" /*scale="5 5 5"*/ 
+                <a-entity key={ idx }
+                position={ position.join(' ') }
+                geometry="primitive: plane; width: 100"
+                material="side: double; transparent: true; opacity: 0; color: #EF2D5E" /*scale="5 5 5"*/
                 text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`} />
               )
             }
