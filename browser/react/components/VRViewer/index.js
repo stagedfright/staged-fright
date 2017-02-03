@@ -94,7 +94,8 @@ export default class VRViewer extends Component {
     setTimeout(() => this.setState({ loading: false }), 1500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, 4000)
-    setTimeout(this.props.showSummary, 8000)
+    // Commented out while testing the visualization
+    // setTimeout(this.props.showSummary, 8000)
   }
 
   componentWillUnmount () {
@@ -131,6 +132,8 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
+            <a-box color="gray" position="-7.38 0.88 -4.53" rotation="0 7.42 0" depth="0.2" height="6" width=".7"></a-box>
+            <a-box color="tomato" position="-7.38 0.88 -4.32" rotation="0 7.42 0" depth="0.2" height="6" width=".7" anchor="bottom"></a-box>
             {
               this.props.speechLines
               .map((line, idx) => ({
