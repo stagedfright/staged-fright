@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 //For debugging
-window.store = store;
+// window.store = store;
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore, push } from 'react-router-redux';
@@ -12,7 +12,7 @@ import firedux from '../redux/store/firedux';
 
 import { AppContainer, NewSpeechFormContainer, FeedbackFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
-import SummaryView from './components/SummaryViewer';
+// import SummaryView from './components/SummaryViewer';
 import 'aframe';
 
 
@@ -44,6 +44,5 @@ const render = () =>
   );
 
 firedux.watch('speechData')
-.then(console.log('watched again!'))
 .then(render)
 .catch(console.log);
