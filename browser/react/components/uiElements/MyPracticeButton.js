@@ -3,14 +3,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import styles from './styles';
 import { teal300 } from 'material-ui/styles/colors';
 
-const MyNonSubmitButton = () => (
+const MyPracticeButton = () => (
   <div>
-    <RaisedButton
-      label="SHOW ME THE MEANING OF WEBVR!"
-      backgroundColor={teal300}
-      style={styles.myraisedbutton}
+    <RaisedButton 
+      label="Let's Practice!"
+      type="submit" 
+      backgroundColor={teal300} 
+      style={styles.myraisedbuttonpractice} 
       labelStyle={styles.myraisedbuttonlabel} />
   </div>
 );
 
-export default MyNonSubmitButton;
+export default MyPracticeButton;
