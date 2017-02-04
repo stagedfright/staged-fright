@@ -6,8 +6,16 @@ module.exports = {
   entry: './browser/react/index.js',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './public/bundle.min.js'
   },
+  plugins: [ //for production build
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
+  ],
   context: __dirname,
   devtool: 'source-map',
   module: {
