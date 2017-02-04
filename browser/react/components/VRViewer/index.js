@@ -18,9 +18,16 @@ export default class VRViewer extends Component {
 
     this.meterInterval = null;
     this.speechLines = this.props.speechLines;
+    // this coefficient adjust the text scrolling speed based on user provided WMP value
+    // the formula used was empirically verified
+    this.coefficient = this.props.wpm * 0.000002084;
+    // this is the delay (in ms) used for initialization of recording (5 sec after component starts mounting)
+    this.initRecording = 5000;
+    // the time needed for the whole speech rolling display with user defined WPM speed
+    this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
     this.startRecording = this.startRecording.bind(this);
     this.override = this.override.bind(this);
-    // this.streamToStore = this.streamToStore.bind(this);
+    
   }
 
   override() {
@@ -71,39 +78,16 @@ export default class VRViewer extends Component {
   }
 
 
-// streamToStore(analyser) {
-
-//   analyser.fftSize = 2048;
-//   // the AnalyserNode.frequencyBinCount value is half the fft
-//   // & = how many data pts we collect for that buffer size
-//   var bufferLength = analyser.frequencyBinCount;
-
-//   // instantiate an unsigned 8-bit integer array to hold our values
-//   var dataArray = new Uint8Array(bufferLength);
-
-//   var poll = () => {
-//     // loops and gets the data continuously over time
-//     this.pollRafId = requestAnimationFrame(poll);
-
-//     // fill the array with the current sine wave for the point in time polled
-//     analyser.getByteTimeDomainData(dataArray);
-//     //console.log(dataArray);
-//   };
-
-//   // starts the loop off; it will run continuously from here
-//   poll();
-// }
-
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 1500);
     this.tick(window.performance.now());
-    setTimeout(this.startRecording, 4000)
+    setTimeout(this.startRecording, this.initRecording);
     // Commented out while testing the visualization
-    // setTimeout(this.props.showSummary, 8000)
+    // setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
   }
 
   componentWillUnmount () {
-    cancelAnimationFrame(this.pollRafId);
+
     cancelAnimationFrame(this.tickRafId)
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
     soundMeter.stop();
@@ -112,7 +96,7 @@ export default class VRViewer extends Component {
 
   tick = time => {
     const dt = time - this.state.time
-    const at = this.state.at + 0.0005 * dt
+    const at = this.state.at + this.coefficient * dt
     this.setState({ time, at })
     this.tickRafId = requestAnimationFrame(this.tick)
   }
