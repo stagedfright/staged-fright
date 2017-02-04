@@ -13,7 +13,7 @@ export default class VRViewer extends Component {
       at: 0,
       time: window.performance.now(),
       loading: true,
-      loudness: 0,
+      override: false,
     }
 
     this.meterInterval = null
@@ -28,7 +28,11 @@ export default class VRViewer extends Component {
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
 
     this.startRecording = this.startRecording.bind(this);
+    this.override = this.override.bind(this);
+  }
 
+  override() {
+    this.setState({ override: true })
   }
 
   startRecording() {
@@ -57,12 +61,7 @@ export default class VRViewer extends Component {
                     return;
                   }
                   this.meterInterval = setInterval(() => {
-                    // console.log("THIS IS THE INSTANT meter: ", soundMeter.instant.toFixed(2));
-                    this.setState({
-                      loudness: soundMeter.slow.toFixed(2)
-                    });
-                    console.log('THIS IS THE SLOW MEEETER', soundMeter.slow.toFixed(2));
-                  //   console.log('THIS IS THE SOUND CLIP:', soundMeter.clip);
+                    this.props.syncLoudness(soundMeter.slow.toFixed(2));
                   }, 200);
                 });
             //connect audio context to the stream we created
@@ -80,6 +79,7 @@ export default class VRViewer extends Component {
     setTimeout(this.startRecording, this.initRecording);
     // Commented out while testing the visualization
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
+
   }
 
   componentWillUnmount () {
@@ -100,7 +100,7 @@ export default class VRViewer extends Component {
     const { handleSubmit, isInitialized } = this.props;
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
-    var volume = this.state.loudness * 30;
+    var volume = this.props.loudness * 30;
 
     function colorChange(volume) {
       if (volume < 2.1) {
@@ -112,7 +112,7 @@ export default class VRViewer extends Component {
       }
     }
 
-    // if (navigator.userAgent.match('Mobi')) {
+    if (this.state.override || navigator.userAgent.match('Mobi')) {
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -146,7 +146,7 @@ export default class VRViewer extends Component {
                     anchor="bottom"></a-box>
             <a-entity position="-3.26 0.87 -4.24" scale="10 10 10" text="value: V\nO\nL\nU\nM\nE; line-height: 30px;"></a-entity>
             {
-              this.props.speechLines
+              this.speechLines
               .map((line, idx) => ({
                 line, idx, position: [0.28, at - idx, -0.26]
               }))
@@ -162,7 +162,7 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    // } else return <DesktopVRView />
+    } else return <DesktopVRView override={this.override}/>
   }
 }
 

@@ -1,16 +1,20 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-import { finishRecording } from '../../redux/action-creators';
+import { finishRecording, updateLoudness } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
   speechLines: state.get('data').speechData.speechLines,
   wpm: state.get('data').speechData.wpm,
+  loudness: state.get('data').speechData.loudness,
   // isInitialized: state.get('isInitialized')
 });
 
 const mapDispatchToProps = dispatch => ({
   showSummary: () => {
     dispatch(finishRecording);
+  }, 
+  syncLoudness: (loudness) => {
+  	dispatch(updateLoudness(loudness));
   }
 })
 

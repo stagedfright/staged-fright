@@ -28,6 +28,10 @@ export const finishRecording = dispatch => {
   dispatch(push(`/${sessionKey}/summary`));
 };
 
+export const updateLoudness = loudness => dispatch => {
+  firedux.update('speechData', { loudness });
+};
+
 //     // _.each(speechData, (sd, id) => firedux.remove(`speechData/${id}`));
 //   }
 
