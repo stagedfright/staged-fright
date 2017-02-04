@@ -8,5 +8,8 @@ export default {
 	},
 	title: {
 		fontFamily: 'Limelight'
+	},
+	question: {
+		height: '500px'
 	}
 };
