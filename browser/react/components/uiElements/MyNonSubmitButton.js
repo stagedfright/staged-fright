@@ -6,7 +6,7 @@ import { lightGreenA700 } from 'material-ui/styles/colors';
 const MyNonSubmitButton = () => (
   <div>
     <RaisedButton
-      label="SHOW ME THE MEANING OF WEBVR!"
+      label="Show me the meaning of WebVR!"
       backgroundColor={lightGreenA700}
       style={styles.myraisedbutton}
       labelStyle={styles.myraisedbuttonlabel} />
