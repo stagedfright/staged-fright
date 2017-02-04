@@ -20,19 +20,19 @@ import 'aframe';
 injectTapEventPlugin();
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState (state) {
-      return {
-        'locationBeforeTransitions': state.get('locationBeforeTransitions')
-      }
-  }
-});
+// const history = syncHistoryWithStore(browserHistory, store, {
+//   selectLocationState (state) {
+//       return {
+//         'locationBeforeTransitions': state.get('locationBeforeTransitions')
+//       }
+//   }
+// });
 
 const render = () =>
   ReactDOM.render(
       <MuiThemeProvider>
       <Provider store={store}>
-        <Router history={history}>
+        <Router history={browserHistory}>
           <Route path='/:sessionKey/home' component={SplashScreen} />
           <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
           <Route path='/:sessionKey/practice' component={AppContainer} />
@@ -44,5 +44,6 @@ const render = () =>
   );
 
 firedux.watch('speechData')
+.then(console.log('watched again!'))
 .then(render)
 .catch(console.log);
