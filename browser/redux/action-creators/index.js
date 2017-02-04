@@ -24,6 +24,11 @@ export const submitSpeechData = fields => dispatch => {
   dispatch(push(`/${sessionKey}/practice`));
 };
 
+export const sendFeedback = fields => dispatch => {
+  firedux.set('speechData/feedback', fields);
+  dispatch(push(`/${sessionKey}/home`));
+};
+
 export const finishRecording = dispatch => {
   dispatch(push(`/${sessionKey}/summary`));
 };

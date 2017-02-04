@@ -10,7 +10,7 @@ import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { syncHistoryWithStore, push } from 'react-router-redux';
 import firedux from '../redux/store/firedux';
 
-import { AppContainer, NewSpeechFormContainer, Container } from './containers';
+import { AppContainer, NewSpeechFormContainer, FeedbackFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
 import SummaryView from './components/SummaryViewer';
 import 'aframe';
@@ -36,7 +36,7 @@ const render = () =>
           <Route path='/:sessionKey/home' component={SplashScreen} />
           <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
           <Route path='/:sessionKey/practice' component={AppContainer} />
-          <Route path='/:sessionKey/summary' component={SummaryView} />
+          <Route path='/:sessionKey/summary' component={FeedbackFormContainer} />
         </Router>
       </Provider>
       </MuiThemeProvider>,
