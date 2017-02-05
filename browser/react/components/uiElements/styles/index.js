@@ -19,5 +19,23 @@ export default {
 		fontSize: '3vh',
 		color: 'white',
 		fontWeight: '600',
-	}
+	},
+
+	sflabel: {
+		fontSize: '1.5vw',
+	},
+
+	sfroot: {
+		width: '100%',
+		marginLeft: 'auto',
+		marginRight: 'auto',
+		height: '20vh'
+	},
+	menuitem: {
+		fontSize: '1vw',
+		paddingTop: '3vh'
+	},
+	menu: {
+		paddingTop: '3vh'
+	},
 };

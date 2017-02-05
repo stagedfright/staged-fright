@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { MyRaisedButton, SelectField } from '../uiElements';
-import { teal300 } from 'material-ui/styles/colors';
 import styles from './styles';
 
 export default class FeedbackForm extends Component {
@@ -57,51 +56,40 @@ export default class FeedbackForm extends Component {
 
   render() {
     return (
-      <div className= "container">
-        <div className="center">
+      <div className= "container" style={styles.container}>
         <div className="row">
-          <div className="col" style={{backgroundColor: teal300 }} >
+          <div className="col" style={styles.flowCol} >
             <h4>
               <span className='flow-text' style={{color: '#FFFFFF'}}>
-                  Thanks for trying out StagedFright! Tell us what your experience was like by filling out the short survey below.
+                  Thanks for trying out StagedFright! Tell us what your experience was like by filling out the short survey below. (Click on each question to answer it.)
               </span>
             </h4>
           </div>
         </div>
           <form onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className={styles.question}>
-                <SelectField
-                  value={this.state.device}
-                  handleChange={this.handleSelectChange('device')}
-                  label={'What device did you use to test StagedFright?'}
-                  opt1={'A VR-enabled mobile device'}
-                  opt2={'A desktop browser'}
-                  opt3={'Both!'}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className={styles.question}>
-                <SelectField
-                  value={this.state.performance}
-                  handleChange={this.handleSelectChange('performance')}
-                  label={'Did you experience any performance-related issues (e.g. lag, visual artifacts) when testing StagedFright?'}
-                  textareaStyle={'height: 200px'}
-                  opt1={'Yes'}
-                  opt2={'No'}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12" style={{backgroundColor: teal300 }} >
+              <SelectField
+                value={this.state.device}
+                handleChange={this.handleSelectChange('device')}
+                label={'What device did you use to test StagedFright?'}
+                opt1={'A VR-enabled mobile device'}
+                opt2={'A desktop browser'}
+                opt3={'Both!'}
+              />
+              <SelectField
+                value={this.state.performance}
+                handleChange={this.handleSelectChange('performance')}
+                label={'Did you experience any performance-related issues (e.g. lag, visual artifacts) when testing StagedFright?'}
+                textareaStyle={'height: 200px'}
+                opt1={'Yes'}
+                opt2={'No'}
+              />
+              <div className="col s12" style={styles.flowCol} >
                 <h4>
                   <span className='flow-text' style={{color: '#FFFFFF'}}>
                       If you experienced any performance/device compatibility issues when using StagedFright, please let us know your device/browser, and the nature of the issues experienced, in the 'additional comments' section below.
                   </span>
                 </h4>
               </div>
-            </div>
             <br/>
             <SelectField
               value={this.state.usability}
@@ -140,8 +128,11 @@ export default class FeedbackForm extends Component {
               id="realistic-field-controlled"
               floatingLabelText="What aspects of StagedFright were most faithful to the experience of actual public speaking?"
               value={this.state.realistic}
+              floatingLabelStyle={styles.tfLabel}
               multiLine={true}
+              textareaStyle={styles.textarea}
               rows={3}
+              fullWidth={true}
               onChange={this.handleChange('realistic')}
             />
             <br />
@@ -149,6 +140,9 @@ export default class FeedbackForm extends Component {
               id="volumehelpful-field-controlled"
               floatingLabelText="Was the speech volume feedback intelligible/helpful?"
               value={this.state.volumehelpful}
+              floatingLabelStyle={styles.tfLabel}
+              inputStyle={styles.input}
+              fullWidth={true}
               onChange={this.handleChange('volumehelpful')}
             />
             <br />
@@ -170,6 +164,9 @@ export default class FeedbackForm extends Component {
               floatingLabelText="Do you have any suggestions for improvements/enhancements you'd like to see?"
               multiLine={true}
               rows={3}
+              floatingLabelStyle={styles.tfLabel}
+              fullWidth={true}
+              textareaStyle={styles.textarea}
               value={this.state.overall}
               onChange={this.handleChange('overall')}
             />
@@ -200,6 +197,9 @@ export default class FeedbackForm extends Component {
               id="addtl-field-controlled"
               floatingLabelText="Any additional feedback/concerns? (Also feel free to address to Jola/Harmony/Julie/Christine in person!"
               multiLine={true}
+              fullWidth={true}
+              floatingLabelStyle={styles.tfLabel}
+              textareaStyle={styles.textarea}
               rows={5}
               value={this.state.addtl}
               onChange={this.handleChange('addtl')}
@@ -208,15 +208,14 @@ export default class FeedbackForm extends Component {
             <MyRaisedButton/>
           </form>
           <div className="row">
-            <div className="col s12" style={{backgroundColor: teal300 }} >
+            <div className="col s12" style={styles.flowCol} >
               <h4>
                 <span className='flow-text' style={{color: '#FFFFFF'}}>
-                    Thanks for your feedback! Click the button above to submit and be returned to the StagedFright homepage.
+                  Thanks for your feedback! Click the button above to submit and be returned to the StagedFright homepage.
                 </span>
               </h4>
             </div>
           </div>
-        </div>
       </div>
     );
   }

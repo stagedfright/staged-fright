@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import styles from './styles';
 
 /**
  * `SelectField` is implemented as a controlled component,
@@ -13,7 +14,11 @@ const MySelectField = ({ value, handleChange, label, opt1, opt2, opt3=null, opt4
           floatingLabelText={label}
           value={value}
           onChange={handleChange}
-          autoWidth={true}
+          fullWidth={true}
+          floatingLabelStyle={styles.sflabel}
+          style={styles.sfroot}
+          menuItemStyle={styles.menuitem}
+          menuStyle={styles.menu}
         >
           <MenuItem value={1} primaryText={opt1} />
           <MenuItem value={2} primaryText={opt2} />
