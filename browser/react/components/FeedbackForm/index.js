@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { MyRaisedButton, SelectField } from '../uiElements';
 import styles from './styles';
+import { Link } from 'react-router';
 
 export default class FeedbackForm extends Component {
 
@@ -48,6 +49,7 @@ export default class FeedbackForm extends Component {
       wouldusepresent: this.state.wouldusepresent,
       mostwanted: this.state.mostwanted
     });
+    window.location = window.location.origin;
   }
 
   handleSelectChange = field => (event, index, value) => this.setState({
@@ -62,6 +64,7 @@ export default class FeedbackForm extends Component {
             <h4>
               <span className='flow-text' style={{color: '#FFFFFF'}}>
                   Thanks for trying out StagedFright! Tell us what your experience was like by filling out the short survey below. (Click on each question to answer it.)
+                  <br/>
               </span>
             </h4>
           </div>

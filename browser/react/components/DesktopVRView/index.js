@@ -5,7 +5,8 @@ import { MyNonSubmitButton } from '../uiElements';
 const DesktopVRView = ({ override }) => (
     <div style={styles.container}>
     	<h3 style={styles.title}><strong>Welcome to StagedFright's VR speech practice mode!</strong></h3>
-    	<h4>1. Allow microphone access on your desktop browser.<br/>
+    	<h4>1. Allow microphone access on your desktop browser. 
+            <br/><small>(Your desktop browser must be open to this page in order to send real-time volume tracking to your mobile device.)</small><br/>
     		2. Navigate to the following URL on your VR-enabled mobile device:
     	</h4>
     	<h3><strong>{window.location.href}</strong></h3>

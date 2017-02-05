@@ -1,5 +1,5 @@
 
-import { push } from 'react-router-redux';
+import { push, replace } from 'react-router-redux';
 import firedux from '../store/firedux';
 
 const sessionKey = firedux.ref.key;
@@ -10,12 +10,12 @@ export const submitSpeechData = fields => dispatch => {
 };
 
 export const sendFeedback = fields => dispatch => {
-  firedux.set('speechData/feedback', fields);
-  dispatch(push(`/${sessionKey}/home`));
+  firedux.push('speechData/feedback', fields);
 };
 
 export const finishRecording = dispatch => {
-  dispatch(push(`/${sessionKey}/summary`));
+	//redirects instead of a push as a way to get over component mounting scroll problems
+	window.location.pathname = `/${sessionKey}/feedback`;
 };
 
 export const updateLoudness = loudness => dispatch => {
