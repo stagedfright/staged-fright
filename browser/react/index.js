@@ -12,7 +12,7 @@ import firedux from '../redux/store/firedux';
 
 import { AppContainer, NewSpeechFormContainer, FeedbackFormContainer } from './containers';
 import SplashScreen from './components/SplashScreen';
-// import SummaryView from './components/SummaryViewer';
+import SelectionScreen from './components/SelectionScreen';
 import 'aframe';
 
 
@@ -34,9 +34,10 @@ const render = () =>
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path='/:sessionKey/home' component={SplashScreen} />
+          <Route path='/:sessionKey/select' component={SelectionScreen} />
           <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
           <Route path='/:sessionKey/practice' component={AppContainer} />
-          <Route path='/:sessionKey/summary' component={FeedbackFormContainer} />
+          <Route path='/:sessionKey/feedback' component={FeedbackFormContainer} />
         </Router>
       </Provider>
       </MuiThemeProvider>,

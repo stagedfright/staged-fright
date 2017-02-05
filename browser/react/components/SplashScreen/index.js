@@ -32,7 +32,7 @@ export default class SplashScreen extends Component {
 				<h1 style={styles.overlayTextBig}>
 					Choose StagedFright®
 				</h1>
-				<Link to={`/${this.props.params.sessionKey}/new-speech`}>
+				<Link to={`/${this.props.params.sessionKey}/select`}>
 					<MyRaisedButton/>
 				</Link>
 			</div>;
