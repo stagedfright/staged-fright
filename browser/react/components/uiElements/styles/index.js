@@ -31,11 +31,33 @@ export default {
 		marginRight: 'auto',
 		height: '20vh'
 	},
+
 	menuitem: {
 		fontSize: '1vw',
 		paddingTop: '3vh'
 	},
+
 	menu: {
 		paddingTop: '3vh'
+	},
+
+	newspchPaper: {
+	  height: '70vh',
+	  width: '40vw',
+	  margin: '2vw',
+	  textAlign: 'center',
+	  display: 'inline-block',
+	  backgroundImage: 'url(/newspch.gif)',
+	  backgroundSize: '70vh 70vh',
+	},
+
+	oldspchPaper: {
+	  height: '60vh',
+	  width: '60vh',
+	  margin: '5vw',
+	  textAlign: 'center',
+	  display: 'inline-block',
+	  backgroundImage: 'url(/oldspch.gif)',
+	  backgroundSize: '60vh 60vh',
 	},
 };

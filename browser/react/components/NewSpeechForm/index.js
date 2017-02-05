@@ -7,13 +7,10 @@ export default class NewSpeechForm extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       wpm: 120,
-      speechText: "Ladies and Gentlemen! \nCopy and paste your speech text here...\n",
+      speechText: 'Copy and paste the text of your speech here.',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = field => event => {
@@ -39,7 +36,7 @@ export default class NewSpeechForm extends Component {
           <div className="col s12" style={{backgroundColor: teal300 }} >
                 <h4>
                   <span className='flow-text' style={{color: '#FFFFFF'}}>
-                    Please enter your speech information here
+                    Please enter your speech information below, and then click the button to start practicing! 
                   </span>
                 </h4>
           </div>
@@ -49,6 +46,7 @@ export default class NewSpeechForm extends Component {
                 id="wpm-field-controlled"
                 floatingLabelText="Words per minute (average is 110-150)"
                 type="number"
+                fullWidth={true}
                 value={this.state.wpm}
                 onChange={this.handleChange('wpm')}
               />
@@ -57,7 +55,8 @@ export default class NewSpeechForm extends Component {
                 id="speechtext-field-controlled"
                 floatingLabelText="Speech text"
                 multiLine={true}
-                rows={20}
+                rows={15}
+                fullWidth={true}
                 value={this.state.speechText}
                 onChange={this.handleChange('speechText')}
               />
@@ -66,7 +65,7 @@ export default class NewSpeechForm extends Component {
             </form>
           </div>
           <div className="col s6">
-            <img src="/speech-writer.gif" style={{width: '100%' }}/>
+            <img src="/speech-writer.gif" style={{ width: '100%', padding: '4.8vw 0vw 2vw 2vw' }}/>
           </div>
         </div>
       </div>
