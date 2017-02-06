@@ -32,4 +32,4 @@ const firedux = new Firedux({
   ref
 });
 
-export default firedux
+export { firedux as default, firebaseApp };
