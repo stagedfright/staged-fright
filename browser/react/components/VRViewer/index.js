@@ -12,6 +12,7 @@ export default class VRViewer extends Component {
       at: 0,
       time: window.performance.now(),
       loading: true,
+
       override: false,
     }
 
@@ -26,6 +27,7 @@ export default class VRViewer extends Component {
     // the time needed for the whole speech rolling display with user defined WPM speed
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
 
+
     this.startRecording = this.startRecording.bind(this);
     this.override = this.override.bind(this);
   }
@@ -33,6 +35,7 @@ export default class VRViewer extends Component {
   override() {
     this.setState({ override: true })
   }
+
 
   startRecording() {
     navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
@@ -49,6 +52,7 @@ export default class VRViewer extends Component {
        .then((stream) => {
           this.stream = stream
           var soundMeter = window.soundMeter = new SoundMeter(audioCtx);
+
           soundMeter.connectToSource(stream, (e) => {
             if (e) {
               alert(e);
@@ -68,6 +72,7 @@ export default class VRViewer extends Component {
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
     // Commented out while testing the visualization
+
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
 
   }
@@ -102,7 +107,9 @@ export default class VRViewer extends Component {
       }
     }
 
+
     if (this.state.override || navigator.userAgent.match('Mobi')) {
+
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -137,11 +144,23 @@ export default class VRViewer extends Component {
               width=".7"
               anchor="bottom">
             </a-box>
-            <a-entity 
-              position="-3.26 0.87 -4.24" 
-              scale="10 10 10" 
-              text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
+            <a-box  color={colorChange(volume)}
+                    position={`
+                      -7.38
+                      ${-2.12 + volume/2}
+                      -4.32
+                    `}
+                    rotation="0 7.42 0"
+                    depth="0.2"
+                    height={volume}
+                    width=".7"
+                    anchor="bottom">
+              </a-box>
+            <a-entity position="-3.26 0.87 -4.24" 
+                      scale="10 10 10" 
+                      text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
             </a-entity>
+
             {
               this.speechLines
               .map((line, idx) => ({
@@ -156,6 +175,7 @@ export default class VRViewer extends Component {
                   material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
                   text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`}>
                 </a-entity>
+
               )
             }
           </a-scene>

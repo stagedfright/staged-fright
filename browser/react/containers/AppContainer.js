@@ -12,6 +12,7 @@ const mapDispatchToProps = dispatch => ({
   showSummary: () => {
     dispatch(finishRecording);
   }, 
+
   syncLoudness: (loudness) => {
   	dispatch(updateLoudness(loudness));
   }

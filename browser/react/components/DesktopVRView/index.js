@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles';
+
 import { MyNonSubmitButton } from '../uiElements';
 
 const DesktopVRView = ({ override }) => (
