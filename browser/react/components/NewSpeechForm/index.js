@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import { MyPracticeButton } from '../uiElements';
+import { VRButton } from '../uiElements';
 import { teal300 } from 'material-ui/styles/colors';
 
 export default class NewSpeechForm extends Component {
@@ -34,9 +34,9 @@ export default class NewSpeechForm extends Component {
       <div className="container">
         <div className="row">
           <div className="col s12" style={{backgroundColor: teal300 }} >
-                <h4>
+                <h4 style={{textAlign: 'center'}}>
                   <span className='flow-text' style={{color: '#FFFFFF'}}>
-                    Please customize your speech information below, and then click the button to start practicing! 
+                    Enter your speech information below and click to start practicing!
                   </span>
                 </h4>
           </div>
@@ -61,7 +61,7 @@ export default class NewSpeechForm extends Component {
                 onChange={this.handleChange('speechText')}
               />
               <br />
-              <MyPracticeButton />
+              <VRButton label={"Let's Practice"} color={teal300} type={"submit"} />
             </form>
           </div>
           <div className="col s6">

@@ -8,5 +8,14 @@ export default {
 	},
 	title: {
 		fontFamily: 'Limelight'
+	},
+	center: {
+		textAlign: 'center'
+	},
+	list: {
+		listStyleType: 'disc'
+	},
+	padded: {
+		padding: '20px'
 	}
 };

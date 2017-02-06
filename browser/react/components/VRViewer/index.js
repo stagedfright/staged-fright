@@ -82,6 +82,7 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
+
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
