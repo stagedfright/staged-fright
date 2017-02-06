@@ -6,57 +6,51 @@ import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
-const SpeechSelectList = () => (
+const SpeechSelectList = ({ pickPremadeSpeech }) => (
   <MobileTearSheet>
-    <List style={{textAlign: 'center'}}>
+    <List style={{ textAlign: 'center' }}>
       <Subheader>Get inspired by the classics.</Subheader>
-      <a href={`/gettysburgaddress/practice`}>
-        <ListItem
-          primaryText="Gettysburg Address (~2 min)"
-          leftAvatar={<Avatar src="/lincoln.jpeg" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem 
+        onClick={() => pickPremadeSpeech('gettysburgaddress')}
+        primaryText="Gettysburg Address (~2 min)"
+        leftAvatar={<Avatar src="/lincoln.jpeg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
       <Divider />
-      <a href={`/ihaveadream/practice`}>
-        <ListItem
-          primaryText="I Have A Dream (~2 min)"
-          leftAvatar={<Avatar src="/mlk.jpg" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem
+        onClick={() => pickPremadeSpeech('ihaveadream')}
+        primaryText="I Have A Dream (~2 min)"
+        leftAvatar={<Avatar src="/mlk.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
       <Divider />
-      <a href={`/thencamethewar/practice`}>
-        <ListItem
-          primaryText="Then Came The War (~3 min)"
-          leftAvatar={<Avatar src="/yuri.jpg" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem
+        onClick={() => pickPremadeSpeech('thencamethewar')}
+        primaryText="Then Came The War (~3 min)"
+        leftAvatar={<Avatar src="/yuri.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
       <Divider />
-      <a href={`/womensrights/practice`}>
-        <ListItem
-          primaryText="Women's Rights Are Human Rights (~3 min)"
-          leftAvatar={<Avatar src="/hillary.png" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem
+        onClick={() => pickPremadeSpeech('womensrights')}
+        primaryText="Women's Rights Are Human Rights (~3 min)"
+        leftAvatar={<Avatar src="/hillary.png" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
       <Divider />
-      <a href={`/independenceday/practice`}>
-        <ListItem
-          primaryText="Independence Day (~2 min)"
-          leftAvatar={<Avatar src="/indyday.jpg" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem
+        onClick={() => pickPremadeSpeech('independenceday')}
+        primaryText="Independence Day (~2 min)"
+        leftAvatar={<Avatar src="/indyday.jpg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
       <Divider />
-      <a href={`/pi/practice`}>
-        <ListItem
-          primaryText="The First 100 Digits of Pi (~1 min)"
-          leftAvatar={<Avatar src="/pi.jpeg" />}
-          rightIcon={<CommunicationChatBubble />}
-        />
-      </a>
+      <ListItem
+        onClick={() => pickPremadeSpeech('pi')}
+        primaryText="The First 100 Digits of Pi (~1 min)"
+        leftAvatar={<Avatar src="/pi.jpeg" />}
+        rightIcon={<CommunicationChatBubble />}
+      />
     </List>
   </MobileTearSheet>
 );

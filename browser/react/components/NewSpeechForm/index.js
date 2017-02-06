@@ -8,8 +8,8 @@ export default class NewSpeechForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wpm: 120,
-      speechText: 'Copy and paste the text of your speech here.',
+      wpm: props.wpm,
+      speechText: props.speechLines,
     };
   }
 
@@ -36,7 +36,7 @@ export default class NewSpeechForm extends Component {
           <div className="col s12" style={{backgroundColor: teal300 }} >
                 <h4>
                   <span className='flow-text' style={{color: '#FFFFFF'}}>
-                    Please enter your speech information below, and then click the button to start practicing! 
+                    Please customize your speech information below, and then click the button to start practicing! 
                   </span>
                 </h4>
           </div>
