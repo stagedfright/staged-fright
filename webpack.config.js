@@ -1,21 +1,19 @@
 'use strict';
 
 const webpack = require('webpack');
+const PROD = JSON.parse(process.env.PROD_ENV || '0');
 
 module.exports = {
   entry: './browser/react/index.js',
   output: {
     path: __dirname,
-    filename: './public/bundle.min.js'
+    filename: PROD ? './public/bundle.min.js' : './public/bundle.js'
   },
-  plugins: [ //for production build
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
-  ],
+  plugins: PROD ? [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ] : [],
   context: __dirname,
   devtool: 'source-map',
   module: {
