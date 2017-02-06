@@ -1,4 +1,6 @@
 import React from 'react';
+import HelpHint from '../HelpHint';
+import HelpNote from '../HelpNote';
 import styles from './styles';
 import { teal300 } from 'material-ui/styles/colors';
 
@@ -21,7 +23,9 @@ const DesktopVRView = ({ override }) => (
                         <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
                         <li className="list" style={styles.list}>Navigate to the following URL on your VR-enabled mobile device:</li>
                     </ul>
-                    <p><strong>{window.location.href}</strong></p>
+                    <p style={{fontSize: '18px'}}><strong>{window.location.href}</strong></p>
+                        <br/>
+                        <HelpNote />                   
                 </div>
             </div>
             <div className="col s6">
@@ -31,7 +35,13 @@ const DesktopVRView = ({ override }) => (
                         <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
                         <li className="list" style={styles.list}>Click the button below to enter VR view:</li>
                     </ul>
-                    <VRButton onClick={override} label={"Continue"} color={teal300} type={"submit"} />
+                    <div onClick={override}>
+                        <br/>
+                        <VRButton label={"Continue"} color={teal300} type={"submit"} />
+                        <br/>
+                        <br/>
+                    </div>
+                    <HelpHint />
                 </div>
             </div>
         </div>
