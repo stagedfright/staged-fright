@@ -2,13 +2,17 @@ import NewSpeechForm from '../components/NewSpeechForm';
 import { connect } from 'react-redux';
 import { submitSpeechData } from '../../redux/action-creators';
 
+const stripSpeechLines = lines => {
+  return lines.slice(3, lines.length - 4).join(' ');
+};
+
 const mapStateToProps = state => ({
-  wpm: state.get('wpm'),
+  wpm: state.get('data').speechData ? state.get('data').speechData.wpm : 120,
+  speechLines: state.get('data').speechData ? stripSpeechLines(state.get('data').speechData.speechLines) : '',
 });
 
 const mapDispatchToProps = dispatch => ({
   submitSpeechDataForm: (fields) => {
-    // evt.preventDefault();
     //fields: { wpm, speechText }
     function splitter(string) {
       var arr = string.replace( /[\n\t]/g, ' ' ).split(' ');
@@ -22,12 +26,15 @@ const mapDispatchToProps = dispatch => ({
       return finalSpeech;
     }
 
-    const speechLines = ['3...', '2...', '1...'].concat(splitter(fields.speechText).concat(['', '', 'You\'re done!']))
+    const speechLines = ['3...', '2...', '1...']
+      .concat(splitter(fields.speechText)
+      .concat(['', '', 'You\'re done!']))
     dispatch(submitSpeechData({
     	wpm: fields.wpm,
     	speechLines,
     }));
-  }
+  },
+
 });
 
 

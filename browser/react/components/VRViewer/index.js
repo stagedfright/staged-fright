@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import styles from './styles';
 import InitialLoading from '../InitialLoading';
 import DesktopVRView from '../DesktopVRView';
-import { SoundMeter } from './utils/loudness';
+import VolumeBar from '../VolumeBar';
+import SpeechLine from '../SpeechLines';
+import startRecordingUtil from './utils/startRecording';
+
+
 
 export default class VRViewer extends Component {
 
@@ -27,52 +31,19 @@ export default class VRViewer extends Component {
     // the time needed for the whole speech rolling display with user defined WPM speed
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
 
-
-    this.startRecording = this.startRecording.bind(this);
+    this.startRecording = startRecordingUtil.bind(this);
     this.override = this.override.bind(this);
+
   }
 
   override() {
     this.setState({ override: true })
   }
 
-
-  startRecording() {
-    navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia ||
-      navigator.msGetUserMedia);
-
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    var source;
-    var stream;
-
-    if (navigator.mediaDevices.getUserMedia) {
-       navigator.mediaDevices.getUserMedia({ audio: true })
-       .then((stream) => {
-          this.stream = stream
-          var soundMeter = window.soundMeter = new SoundMeter(audioCtx);
-
-          soundMeter.connectToSource(stream, (e) => {
-            if (e) {
-              alert(e);
-              return;
-            }
-            this.meterInterval = setInterval(() => {
-              this.props.syncLoudness(soundMeter.slow.toFixed(2));
-            }, 200);
-          });
-        })
-       .catch(e => console.error('getUserMedia() failed: ' + e))
-    }
-  }
-
   componentDidMount () {
-    setTimeout(() => this.setState({ loading: false }), 1500);
+    setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
-    // Commented out while testing the visualization
-
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
 
   }
@@ -92,21 +63,9 @@ export default class VRViewer extends Component {
   }
 
   render () {
-    const { handleSubmit, isInitialized } = this.props;
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
     var volume = this.props.loudness * 30;
-
-    function colorChange(volume) {
-      if (volume < 2.1) {
-        return `#FF0000`
-      } else if (volume < 3.6) {
-        return `#FFFF00`
-      } else {
-        return `#00FF00`
-      }
-    }
-
 
     if (this.state.override || navigator.userAgent.match('Mobi')) {
 
@@ -123,61 +82,16 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <a-box
-              color="gray"
-              position="-7.38 0.88 -4.53"
-              rotation="0 7.42 0"
-              depth="0.2"
-              height="6"
-              width=".7">
-            </a-box>
-            <a-box
-              color={colorChange(volume)}
-              position={`
-                -7.38
-                ${-2.12 + volume/2}
-                -4.32
-              `}
-              rotation="0 7.42 0"
-              depth="0.2"
-              height={volume}
-              width=".7"
-              anchor="bottom">
-            </a-box>
-            <a-box  color={colorChange(volume)}
-                    position={`
-                      -7.38
-                      ${-2.12 + volume/2}
-                      -4.32
-                    `}
-                    rotation="0 7.42 0"
-                    depth="0.2"
-                    height={volume}
-                    width=".7"
-                    anchor="bottom">
-              </a-box>
-            <a-entity position="-3.26 0.87 -4.24"
-                      scale="10 10 10"
-                      text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
-            </a-entity>
 
-            {
-              this.speechLines
+            <VolumeBar volume={volume} />
+            {this.speechLines
               .map((line, idx) => ({
                 line, idx, position: [0.28, at - idx, -0.26]
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <a-entity
-                  key={ idx }
-                  position={ position.join(' ') }
-                  geometry="primitive: plane; width: 100"
-                  material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
-                  text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`}>
-                </a-entity>
-
-              )
-            }
+                <SpeechLine line={line} position={position} idx={idx}/>
+            )}
           </a-scene>
         </div>
       );

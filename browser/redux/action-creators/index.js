@@ -1,12 +1,19 @@
-
 import { push, replace } from 'react-router-redux';
-import firedux from '../store/firedux';
-
+import firedux, { firebaseApp } from '../store/firedux';
 const sessionKey = firedux.ref.key;
 
 export const submitSpeechData = fields => dispatch => {
-  firedux.set('speechData', fields);
-  dispatch(push(`/${sessionKey}/practice`));
+  firedux.set('speechData', fields)
+  .then(dispatch(push(`/${sessionKey}/practice`)));
+};
+
+export const populatePremadeSpeech = id => dispatch => {
+	firebaseApp.database().ref(`sessions/${id}`)
+	.once('value', (value) => {
+		const { speechLines, wpm } = value.val().speechData;
+		firedux.set('speechData', { speechLines, wpm })
+		.then(dispatch(push(`/${sessionKey}/new-speech`)));
+	});
 };
 
 export const sendFeedback = fields => dispatch => {

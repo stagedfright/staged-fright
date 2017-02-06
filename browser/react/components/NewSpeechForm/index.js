@@ -8,8 +8,8 @@ export default class NewSpeechForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wpm: 120,
-      speechText: 'Copy and paste the text of your speech here.',
+      wpm: props.wpm,
+      speechText: props.speechLines,
     };
   }
 
