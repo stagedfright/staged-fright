@@ -4,7 +4,6 @@ import { submitSpeechData } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
   wpm: state.get('wpm'),
-  // speechLines: state.get('speechLines')
 });
 
 const mapDispatchToProps = dispatch => ({
