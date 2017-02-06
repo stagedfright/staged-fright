@@ -1,30 +1,40 @@
 import React from 'react';
 import styles from './styles';
+import { teal300 } from 'material-ui/styles/colors';
 
-import { MyNonSubmitButton } from '../uiElements';
+import { VRButton } from '../uiElements';
 
 const DesktopVRView = ({ override }) => (
-    <div style={styles.container}>
-    	<h3 style={styles.title}><strong>Welcome to StagedFright's VR speech practice mode!</strong></h3>
-    	<h4>1. Allow microphone access on your desktop browser. 
-            <br/><small>(Your desktop browser must be open to this page in order to send real-time volume tracking to your mobile device.)</small><br/>
-    		2. Navigate to the following URL on your VR-enabled mobile device:
-    	</h4>
-    	<h3><strong>{window.location.href}</strong></h3>
-    	<br/>
-    	<br/>
-    	<div onClick={override}>
-    		<h4>Alternatively, click the button below to override device check and proceed to VR speech practice in desktop mode.</h4>
-    	{/*TODO: fix button styling that cuts off label text*/}
-    		<MyNonSubmitButton />
-    	</div>
-    	<br/>
-    	<br/>
-    	<br/>
-    	<h4><strong>Having trouble enabling VR in your desktop browser?</strong></h4>
-    	<br/>
-    	<h5>Follow these instructions to <a href="https://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser">enable WebGL and WebVR in your browser</a>.
-    	</h5> 
+    <div className="container">
+        <div className="row">
+            <div className="col s12" style={{backgroundColor: teal300 }} >
+                <h4 className="center" style={styles.center}>
+                  <span style={{color: '#FFFFFF'}}>
+                    Welcome to StagedFright's VR speech practice mode!
+                  </span>
+                </h4>
+            </div>
+            <div className="col s6">
+                <div className="padded" style={styles.padded}>
+                    <h4 className="center" style={styles.center}>Continue on Mobile</h4>
+                    <ul className="list" style={styles.list}>
+                        <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
+                        <li className="list" style={styles.list}>Navigate to the following URL on your VR-enabled mobile device:</li>
+                    </ul>
+                    <p><strong>{window.location.href}</strong></p>
+                </div>
+            </div>
+            <div className="col s6">
+                <div className="padded" style={styles.padded}>
+                    <h4 className="center" style={styles.center}>Continue on Desktop</h4>
+                    <ul>
+                        <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
+                        <li className="list" style={styles.list}>Click the button below to enter VR view:</li>
+                    </ul>
+                    <VRButton onClick={override} label={"Continue"} color={teal300} type={"submit"} />
+                </div>
+            </div>
+        </div>
     </div>
 )
 

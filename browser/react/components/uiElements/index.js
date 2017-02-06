@@ -5,16 +5,18 @@ import SelectField from './SelectField';
 import OldSpeechPaper from './OldSpeechPaper';
 import NewSpeechPaper from './NewSpeechPaper';
 import SpeechSelectList from './SpeechSelectList';
+import VRButton from './VRButton';
 // import PaperContainer from './PaperContainer';
 
-export { 
-	MyRaisedButton, 
-	MyPracticeButton, 
-	MyNonSubmitButton, 
-	SelectField, 
-	OldSpeechPaper, 
+export {
+	MyRaisedButton,
+	MyPracticeButton,
+	MyNonSubmitButton,
+	SelectField,
+	OldSpeechPaper,
 	NewSpeechPaper,
 	SpeechSelectList,
+  VRButton
 	// PaperContainer,
 };
 

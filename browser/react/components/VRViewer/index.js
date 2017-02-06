@@ -73,7 +73,7 @@ export default class VRViewer extends Component {
     setTimeout(this.startRecording, this.initRecording);
     // Commented out while testing the visualization
 
-    setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
+    // setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
 
   }
 
@@ -123,7 +123,7 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <a-box  
+            <a-box
               color="gray"
               position="-7.38 0.88 -4.53"
               rotation="0 7.42 0"
@@ -131,7 +131,7 @@ export default class VRViewer extends Component {
               height="6"
               width=".7">
             </a-box>
-            <a-box  
+            <a-box
               color={colorChange(volume)}
               position={`
                 -7.38
@@ -156,8 +156,8 @@ export default class VRViewer extends Component {
                     width=".7"
                     anchor="bottom">
               </a-box>
-            <a-entity position="-3.26 0.87 -4.24" 
-                      scale="10 10 10" 
+            <a-entity position="-3.26 0.87 -4.24"
+                      scale="10 10 10"
                       text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
             </a-entity>
 
@@ -168,7 +168,7 @@ export default class VRViewer extends Component {
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <a-entity 
+                <a-entity
                   key={ idx }
                   position={ position.join(' ') }
                   geometry="primitive: plane; width: 100"

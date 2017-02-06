@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from './styles';
-import { MyRaisedButton } from '../uiElements';
+import { VRButton } from '../uiElements';
 import { Link } from 'react-router';
+import { teal300 } from 'material-ui/styles/colors';
 
 export default class SplashScreen extends Component {
 
@@ -28,14 +29,26 @@ export default class SplashScreen extends Component {
 
     let overlayText = null;
 		if (this.state.showMe) overlayText =
-			<div style={styles.overlayText}>
-				<h1 style={styles.overlayTextBig}>
-					Choose StagedFright®
-				</h1>
-				<Link to={`/${this.props.params.sessionKey}/select`}>
-					<MyRaisedButton/>
-				</Link>
-			</div>;
+			<div className="container">
+        <div style={styles.overlayText}>
+  				<div className="row">
+            <h1 style={styles.overlayTextBig}>
+    					Choose StagedFright®
+    				</h1>
+          </div>
+          <div className="row">
+            <div className="col s4">
+            </div>
+            <div className="col s4">
+      				<Link to={`/${this.props.params.sessionKey}/select`}>
+      					<VRButton label={"Let's Go!"} color={teal300} type={"submit"} style={{width: '40%'}}/>
+      				</Link>
+            </div>
+            <div className="col s4">
+            </div>
+          </div>
+  			</div>
+      </div>;
 		else overlayText =
 			<a href="#" style={styles.overlayText}>
 				<h1 style={styles.overlayTextBig}>

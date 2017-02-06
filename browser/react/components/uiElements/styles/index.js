@@ -1,11 +1,4 @@
 export default {
-	myraisedbuttonpractice: {
-		margin: '5vh 30vw',
-		width: '80%',
-		lineHeight: '0vh',
-		borderRadius: '15px',
-		display: 'block',
-	},
 
 	myraisedbutton: {
 		margin: '5vh 30vw',
@@ -19,6 +12,13 @@ export default {
 		fontSize: '3vh',
 		color: 'white',
 		fontWeight: '600',
+	},
+
+	VRButton: {
+		borderRadius: '15px',
+		lineHeight: '0vh',
+		display: 'block',
+		margin: '0'
 	},
 
 	sflabel: {
