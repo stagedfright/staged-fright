@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import HelpHint from '../HelpHint';
 import HelpNote from '../HelpNote';
 import styles from './styles';
@@ -50,7 +51,9 @@ class DesktopVRView extends Component {
                         </ul>
                         <div onClick={props.override}>
                             <br/>
-                            <VRButton label={"Continue"} color={teal300} type={"submit"} />
+                            <Link to={`/${props.params.sessionKey}/practice`}>
+                                <VRButton label={"Continue"} color={teal300} type={"submit"} />
+                            </Link>
                             <br/>
                             <br/>
                         </div>
