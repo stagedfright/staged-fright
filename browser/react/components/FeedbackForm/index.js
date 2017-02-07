@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
-import { MyRaisedButton, SelectField } from '../uiElements';
+import { VRButton, SelectField } from '../uiElements';
 import styles from './styles';
 import { Link } from 'react-router';
+import { teal300 } from 'material-ui/styles/colors';
 
 export default class FeedbackForm extends Component {
 
@@ -208,7 +209,16 @@ export default class FeedbackForm extends Component {
               onChange={this.handleChange('addtl')}
             />
             <br/>
-            <MyRaisedButton/>
+            <div className="row">
+              <div className="col s4">
+              </div>
+              <div className="col s4">
+                <VRButton label={"Submit"} color={teal300} type={"submit"}/>
+              </div>
+              <div className="col s4">
+              </div>
+              <br/>
+            </div>
           </form>
           <div className="row">
             <div className="col s12" style={styles.flowCol} >
