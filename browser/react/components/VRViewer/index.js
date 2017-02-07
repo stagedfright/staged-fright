@@ -20,7 +20,7 @@ export default class VRViewer extends Component {
       override: false,
     }
 
-    this.meterInterval = null
+
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -31,7 +31,6 @@ export default class VRViewer extends Component {
     // the time needed for the whole speech rolling display with user defined WPM speed
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
 
-    this.startRecording = startRecordingUtil.bind(this);
     this.override = this.override.bind(this);
 
   }
@@ -43,7 +42,6 @@ export default class VRViewer extends Component {
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
-    setTimeout(this.startRecording, this.initRecording);
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
 
   }
