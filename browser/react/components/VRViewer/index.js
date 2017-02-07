@@ -16,7 +16,7 @@ export default class VRViewer extends Component {
       at: 0,
       time: window.performance.now(),
       loading: true,
-
+      clap: false,
       override: false,
     }
 
@@ -29,7 +29,8 @@ export default class VRViewer extends Component {
     // this is the delay (in ms) used for initialization of recording (5 sec after component starts mounting)
     this.initRecording = 5000;
     // the time needed for the whole speech rolling display with user defined WPM speed
-    this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 1000;
+    this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 5000;
+    this.startApplause = this.startApplause.bind(this);
 
     this.startRecording = startRecordingUtil.bind(this);
     this.override = this.override.bind(this);
@@ -40,12 +41,16 @@ export default class VRViewer extends Component {
     this.setState({ override: true })
   }
 
+  startApplause() {
+    this.setState({clap: true})
+  }
+
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
-
+    setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
   componentWillUnmount () {
@@ -73,8 +78,10 @@ export default class VRViewer extends Component {
         return <InitialLoading />;
       } else return (
         <div style={styles.container}>
+        {this.state.clap && <audio src='/bravo.mp3' autoPlay></audio>}
           <a-scene auto-enter-vr="false">
             <a-assets>
+              <audio src="/CrowdNoise2.mp3" autoPlay loop></audio>
               <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
