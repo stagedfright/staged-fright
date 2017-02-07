@@ -13,32 +13,21 @@ export default class VRViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      at: 0,
+      scrollOffset: 0,
       time: window.performance.now(),
       loading: true,
       clap: false,
-      override: false,
     }
-
-    this.meterInterval = null
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
     // the formula used was empirically verified
     this.coefficient = this.props.wpm * 0.000002084;
-    // this is the delay (in ms) used for initialization of recording (5 sec after component starts mounting)
     this.initRecording = 5000;
     // the time needed for the whole speech rolling display with user defined WPM speed
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 5000;
     this.startApplause = this.startApplause.bind(this);
 
-    this.startRecording = startRecordingUtil.bind(this);
-    this.override = this.override.bind(this);
-
-  }
-
-  override() {
-    this.setState({ override: true })
   }
 
   startApplause() {
@@ -48,7 +37,6 @@ export default class VRViewer extends Component {
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
-    setTimeout(this.startRecording, this.initRecording);
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
@@ -62,17 +50,15 @@ export default class VRViewer extends Component {
 
   tick = time => {
     const dt = time - this.state.time
-    const at = this.state.at + this.coefficient * dt
-    this.setState({ time, at })
+    const scrollOffset = this.state.scrollOffset + this.coefficient * dt
+    this.setState({ time, scrollOffset })
     this.tickRafId = requestAnimationFrame(this.tick)
   }
 
   render () {
-    const { at, loading } = this.state
+    const { scrollOffset, loading } = this.state
     const scene = document.querySelector('a-scene');
     var volume = this.props.loudness * 30;
-
-    if (this.state.override || navigator.userAgent.match('Mobi')) {
 
       if (loading) {
         return <InitialLoading />;
@@ -101,7 +87,7 @@ export default class VRViewer extends Component {
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
-                line, idx, position: [3, at - idx, 1.3]
+                line, idx, position: [3, scrollOffset - idx, 1.3]
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
@@ -110,6 +96,5 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    } else return <DesktopVRView override={this.override}/>
   }
 }
