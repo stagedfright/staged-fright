@@ -49,7 +49,8 @@ export default class VRViewer extends Component {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
-    setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
+    //commented out for testing!!!!!
+    //setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
@@ -86,7 +87,7 @@ export default class VRViewer extends Component {
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
             <a-entity position="0 0 3.8">
-              <a-camera>
+              <a-camera rotation="-10.00 -35.00 0">
               </a-camera>
             </a-entity>
 
