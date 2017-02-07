@@ -49,8 +49,7 @@ export default class VRViewer extends Component {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
-    //commented out for testing!!!!!
-    //setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
+    setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
