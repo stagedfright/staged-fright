@@ -14,7 +14,8 @@ import {
   AppContainer,
   NewSpeechFormContainer,
   FeedbackFormContainer,
-  SelectContainer
+  SelectContainer,
+  ViewChoiceContainer
 } from './containers';
 import SplashScreen from './components/SplashScreen';
 // import SelectionScreen from './components/SelectionScreen';
@@ -41,7 +42,7 @@ const render = () =>
           <Route path='/:sessionKey/home' component={SplashScreen} />
           <Route path='/:sessionKey/select' component={SelectContainer} />
           <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
-          <Route path='/:sessionKey/choose-view' component={NewSpeechFormContainer} />
+          <Route path='/:sessionKey/choose-view' component={ViewChoiceContainer} />
           <Route path='/:sessionKey/practice' component={AppContainer} />
           <Route path='/:sessionKey/feedback' component={FeedbackFormContainer} />
         </Router>

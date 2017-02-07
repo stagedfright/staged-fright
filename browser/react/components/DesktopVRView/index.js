@@ -37,7 +37,7 @@ class DesktopVRView extends Component {
                             <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
                             <li className="list" style={styles.list}>Navigate to the following URL on your VR-enabled mobile device:</li>
                         </ul>
-                        <p style={{fontSize: '18px'}}><strong>{window.location.href}</strong></p>
+                        <p style={{fontSize: '18px'}}><strong>{window.location.href.replace(/choose-view/, "practice")}</strong></p>
                             <br/>
                             <HelpNote />
                     </div>
