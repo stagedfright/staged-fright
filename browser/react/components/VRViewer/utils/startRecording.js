@@ -13,7 +13,6 @@ export default function startRecording() {
     if (navigator.mediaDevices.getUserMedia) {
        navigator.mediaDevices.getUserMedia({ audio: true })
        .then((stream) => {
-          export const stream = stream;
           this.stream = stream
           var soundMeter = window.soundMeter = new SoundMeter(audioCtx);
 

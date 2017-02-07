@@ -17,10 +17,9 @@ export default class VRViewer extends Component {
       time: window.performance.now(),
       loading: true,
       clap: false,
-      override: false,
     }
 
-
+    console.log("PRAAAAAAHHHPS ", props);
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -32,12 +31,6 @@ export default class VRViewer extends Component {
     this.doneSpeaking = ((60*1000*(this.speechLines.length*8))/(this.props.wpm)) + 5000;
     this.startApplause = this.startApplause.bind(this);
 
-    this.override = this.override.bind(this);
-
-  }
-
-  override() {
-    this.setState({ override: true })
   }
 
   startApplause() {
@@ -70,8 +63,6 @@ export default class VRViewer extends Component {
     const scene = document.querySelector('a-scene');
     var volume = this.props.loudness * 30;
 
-    if (this.state.override || navigator.userAgent.match('Mobi')) {
-
       if (loading) {
         return <InitialLoading />;
       } else return (
@@ -100,6 +91,5 @@ export default class VRViewer extends Component {
           </a-scene>
         </div>
       );
-    } else return <DesktopVRView override={this.override}/>
   }
 }

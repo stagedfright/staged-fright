@@ -17,10 +17,11 @@ class DesktopVRView extends Component {
     }
 
     componentDidMount() {
-        setTimeout(this.startRecording, 5000);
+        setTimeout(this.startRecording, 4000);
     }
 
     render() {
+        return(
         <div className="container">
             <div className="row">
                 <div className="col s12" style={{backgroundColor: teal300 }} >
@@ -49,9 +50,9 @@ class DesktopVRView extends Component {
                             <li className="list" style={styles.list}>Allow microphone access on your desktop browser.</li>
                             <li className="list" style={styles.list}>Click the button below to enter VR view:</li>
                         </ul>
-                        <div onClick={props.override}>
+                        <div>
                             <br/>
-                            <Link to={`/${props.params.sessionKey}/practice`}>
+                            <Link to={`/${this.props.params.sessionKey}/practice`}>
                                 <VRButton label={"Continue"} color={teal300} type={"submit"} />
                             </Link>
                             <br/>
@@ -62,6 +63,7 @@ class DesktopVRView extends Component {
                 </div>
             </div>
         </div>
+        )
     }
 }
 
