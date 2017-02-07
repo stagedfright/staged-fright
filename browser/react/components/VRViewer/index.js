@@ -90,7 +90,7 @@ export default class VRViewer extends Component {
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <SpeechLine line={line} position={position} idx={idx}/>
+                <SpeechLine key={idx} line={line} position={position} idx={idx}/>
             )}
           </a-scene>
         </div>
