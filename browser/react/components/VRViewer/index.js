@@ -87,14 +87,22 @@ export default class VRViewer extends Component {
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
             <a-entity position="0 0 3.8">
-              <a-camera rotation="-10.00 -35.00 0">
+              <a-camera rotation="-10.00 -44.00 0">
               </a-camera>
             </a-entity>
 
+
+            <a-entity
+              position="3 1 1.3"
+              rotation="-4.00 -42.00 0"
+              geometry="primitive: plane; width: 100"
+              material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
+              text={`value: TESTING; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`}>
+            </a-entity>
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
-                line, idx, position: [0.28, at - idx, -0.26]
+                line, idx, position: [3, at - idx, 1.3]
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>

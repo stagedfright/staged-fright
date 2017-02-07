@@ -5,7 +5,7 @@ import colorChange from '../VRViewer/utils/colorChange'
       <a-entity>
         <a-box
           color="gray"
-          position="-7.38 0.88 -4.53"
+          position="5.00 1.88 -10.00"
           rotation="0 7.42 0"
           depth="0.2"
           height="6"
@@ -14,9 +14,9 @@ import colorChange from '../VRViewer/utils/colorChange'
         <a-box
           color={colorChange(props.volume)}
           position={`
-            -7.38
-            ${-2.12 + props.volume/2}
-            -4.32
+            5.00
+            ${-1.12 + props.volume/2}
+            -10.00
           `}
           rotation="0 7.42 0"
           depth="0.2"
@@ -24,9 +24,9 @@ import colorChange from '../VRViewer/utils/colorChange'
           width=".7"
           anchor="bottom">
         </a-box>
-        <a-entity position="-3.26 0.87 -4.24"
+        <a-entity position="8.80 2.70 -8.77"
                   scale="10 10 10"
-                  text="value: V\nO\nL\nU\nM\nE; line-height: 30px;">
+                  text="value: V\nO\nL\nU\nM\nE; line-height: 35px;">
         </a-entity>
       </a-entity>
 );
