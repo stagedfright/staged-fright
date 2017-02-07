@@ -75,15 +75,7 @@ export default class VRViewer extends Component {
               <a-camera rotation="-10.00 -44.00 0">
               </a-camera>
             </a-entity>
-
-
-            <a-entity
-              position="3 1 1.3"
-              rotation="-4.00 -42.00 0"
-              geometry="primitive: plane; width: 100"
-              material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
-              text={`value: TESTING; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`}>
-            </a-entity>
+        
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
