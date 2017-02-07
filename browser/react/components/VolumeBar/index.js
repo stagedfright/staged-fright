@@ -16,7 +16,7 @@ import colorChange from '../VRViewer/utils/colorChange'
           position={`
             5.00
             ${-1.12 + props.volume/2}
-            -10.00
+            -9.80
           `}
           rotation="0 7.42 0"
           depth="0.2"
