@@ -7,7 +7,7 @@ const stripSpeechLines = lines => {
 };
 
 const mapStateToProps = state => ({
-  wpm: state.get('data').speechData ? state.get('data').speechData.wpm : 120,
+  wpm: state.get('data').speechData ? state.get('data').speechData.wpm : 140,
   speechLines: state.get('data').speechData ? stripSpeechLines(state.get('data').speechData.speechLines) : '',
 });
 
