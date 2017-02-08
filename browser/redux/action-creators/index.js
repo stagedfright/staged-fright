@@ -28,3 +28,7 @@ export const finishRecording = dispatch => {
 export const updateLoudness = loudness => dispatch => {
   firedux.update('speechData', { loudness });
 };
+
+export const updatePitch = pitchArray => dispatch => {
+  firedux.update('speechData', { pitchArray });
+};

@@ -5,8 +5,9 @@ import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
 import startRecordingUtil from './utils/startRecording';
+import pitchProcessingUtil from './utils/analyzeFrequency';
 
-
+// import PitchTracker from '../PitchTracker';
 
 export default class VRViewer extends Component {
 
@@ -20,7 +21,15 @@ export default class VRViewer extends Component {
       override: false,
     }
 
-    this.meterInterval = null
+    this.meterInterval = null;
+
+    this.pitchRafId = null;
+
+    this.dps = [];
+
+    this.pitch = this.props.pitch;
+
+    this.processPitch = pitchProcessingUtil.bind(this);
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -33,8 +42,8 @@ export default class VRViewer extends Component {
     this.startApplause = this.startApplause.bind(this);
 
     this.startRecording = startRecordingUtil.bind(this);
-    this.override = this.override.bind(this);
 
+    this.override = this.override.bind(this);
   }
 
   override() {
@@ -49,13 +58,15 @@ export default class VRViewer extends Component {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
     setTimeout(this.startRecording, this.initRecording);
+    setTimeout(this.processPitch, this.initRecording + 2000);
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
   componentWillUnmount () {
-    cancelAnimationFrame(this.tickRafId)
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
+    cancelAnimationFrame(this.tickRafId);
+    cancelAnimationFrame(this.pitchRafId);
+    this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
     soundMeter.stop();
     clearInterval(this.meterInterval);
   }
@@ -83,13 +94,13 @@ export default class VRViewer extends Component {
             <a-assets>
               <audio src="/CrowdNoise2.mp3" autoPlay loop></audio>
               <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
+              <canvas id="my-canvas" crossOrigin="anonymous"></canvas>
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
             <a-entity position="0 0 3.8">
               <a-camera>
               </a-camera>
             </a-entity>
-
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({

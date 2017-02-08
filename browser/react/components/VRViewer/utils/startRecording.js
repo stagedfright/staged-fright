@@ -6,7 +6,7 @@ export default function startRecording() {
       navigator.mozGetUserMedia ||
       navigator.msGetUserMedia);
 
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     var source;
     var stream;
 
@@ -14,7 +14,7 @@ export default function startRecording() {
        navigator.mediaDevices.getUserMedia({ audio: true })
        .then((stream) => {
           this.stream = stream
-          var soundMeter = window.soundMeter = new SoundMeter(audioCtx);
+          var soundMeter = window.soundMeter = new SoundMeter(this.audioCtx);
 
           soundMeter.connectToSource(stream, (e) => {
             if (e) {
