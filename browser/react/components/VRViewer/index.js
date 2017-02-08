@@ -7,7 +7,7 @@ import SpeechLine from '../SpeechLines';
 import startRecordingUtil from './utils/startRecording';
 import pitchProcessingUtil from './utils/analyzeFrequency';
 
-// import PitchTracker from '../PitchTracker';
+import PitchTracker from '../PitchTracker';
 
 export default class VRViewer extends Component {
 
@@ -25,9 +25,7 @@ export default class VRViewer extends Component {
 
     this.pitchRafId = null;
 
-    this.dps = [];
-
-    this.pitch = this.props.pitch;
+    this.pitchDataPoints = this.props.pitch || [];
 
     this.processPitch = pitchProcessingUtil.bind(this);
 
@@ -101,6 +99,7 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
+            <PitchTracker points={this.pitchDataPoints} />
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({

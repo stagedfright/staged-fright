@@ -5,7 +5,7 @@
 * @param qualifier - an optional function that will be called on each 
 *  value to determine whether it should be used
 */
-export default movingAvg = (array, count, qualifier) => {
+export default function (array, count, qualifier) {
 
     // calculate average for subarray
     var avg = function(array, qualifier){
