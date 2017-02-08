@@ -7,6 +7,7 @@ const initialState = Map({
   speechLines: [],
   locationBeforeTransitions: null,
   loudness: 0,
+  pitch: false,
 });
 
 export default initialState;

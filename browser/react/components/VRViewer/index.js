@@ -4,9 +4,8 @@ import InitialLoading from '../InitialLoading';
 import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
-import startRecordingUtil from './utils/startRecording';
 
-
+import PitchTracker from '../PitchTracker';
 
 export default class VRViewer extends Component {
 
@@ -18,6 +17,8 @@ export default class VRViewer extends Component {
       loading: true,
       clap: false,
     }
+
+    this.meterInterval = null;
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -37,15 +38,18 @@ export default class VRViewer extends Component {
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
+
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
   componentWillUnmount () {
-    cancelAnimationFrame(this.tickRafId)
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
+    cancelAnimationFrame(this.tickRafId);
+    cancelAnimationFrame(this.pitchRafId);
+    this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
     soundMeter.stop();
     clearInterval(this.meterInterval);
+    clearInterval(this.pitchInterval);
   }
 
   tick = time => {
@@ -59,6 +63,7 @@ export default class VRViewer extends Component {
     const { scrollOffset, loading } = this.state
     const scene = document.querySelector('a-scene');
     var volume = this.props.loudness * 30;
+    var pitch = this.props.pitch;
 
       if (loading) {
         return <InitialLoading />;
@@ -69,12 +74,14 @@ export default class VRViewer extends Component {
             <a-assets>
               <audio src="/CrowdNoise2.mp3" autoPlay loop></audio>
               <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
+              <canvas id="my-canvas" crossOrigin="anonymous"></canvas>
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
             <a-entity position="0 0 3.8">
               <a-camera rotation="-10.00 -44.00 0">
               </a-camera>
             </a-entity>
+            <PitchTracker pitch={pitch} />
             <a-entity geometry="primitive: box; height: 50px; width: 80px"
                       position="-53 46 72"
                       material="color: gray"></a-entity>
@@ -86,7 +93,6 @@ export default class VRViewer extends Component {
                       position="-70 44.50 70.68"
                       rotation="0 180 0"
                       scale="100 100 100"></a-entity>
-
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({

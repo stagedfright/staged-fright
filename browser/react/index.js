@@ -18,9 +18,8 @@ import {
   ViewChoiceContainer
 } from './containers';
 import SplashScreen from './components/SplashScreen';
-// import SelectionScreen from './components/SelectionScreen';
-import 'aframe';
 
+import 'aframe';
 
 // Hack for mobile support for materialize-ui
 injectTapEventPlugin();

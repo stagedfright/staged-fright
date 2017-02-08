@@ -5,6 +5,7 @@ import HelpNote from '../HelpNote';
 import styles from './styles';
 import { teal300 } from 'material-ui/styles/colors';
 import startRecordingUtil from '../VRViewer/utils/startRecording';
+import { default as pitchProcessingUtil, stdSemitones} from '../VRViewer/utils/analyzeFrequency';
 
 import { VRButton } from '../uiElements';
 
@@ -14,10 +15,20 @@ class DesktopVRView extends Component {
 
         this.startRecording = startRecordingUtil.bind(this);
         this.meterInterval = null
+        this.pitchInterval = null;
+
+        this.pitchRafId = null;
+        this.pitch = this.props.pitch || false;
+        //an array of pitch measures, in MIDI values. Stores up to ten seconds' worth of data at once. 
+        this.pitchDataPoints = [ 40 ];
+
+        this.processPitch = pitchProcessingUtil.bind(this);
+
     }
 
     componentDidMount() {
         setTimeout(this.startRecording, 4000);
+        setTimeout(this.processPitch, 6000);
     }
 
     render() {
