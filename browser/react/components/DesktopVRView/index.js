@@ -50,8 +50,11 @@ class DesktopVRView extends Component {
                             <li className="list" style={styles.list}>Navigate to the following URL on your VR-enabled mobile device:</li>
                         </ul>
                         <p style={{fontSize: '18px'}}><strong>{window.location.href.replace(/choose-view/, "practice")}</strong></p>
-                            <br/>
-                            <HelpNote />
+                        <br/>
+                        <Link to={`/${this.props.params.sessionKey}/feedback`}>
+                            <VRButton label={"Click here when mobile VR finishes"} color={teal300} type={"submit"} onClick={this.props.handleClick} />
+                        </Link>
+                        <HelpNote />
                     </div>
                 </div>
                 <div className="col s6">

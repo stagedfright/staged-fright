@@ -11,6 +11,13 @@ const mapDispatchToProps = dispatch => ({
   syncData: (loudness, monotonyBool) => {
     dispatch(updateData(loudness, monotonyBool));
   },
+
+  handleClick: () => {
+    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
+    soundMeter.stop();
+    clearInterval(this.meterInterval);
+  }
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesktopVRView);
