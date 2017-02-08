@@ -22,7 +22,7 @@ export default function startRecording() {
               return;
             }
             this.meterInterval = setInterval(() => {
-              this.props.syncLoudness(soundMeter.slow.toFixed(2));
+              this.props.syncData(soundMeter.slow.toFixed(2), this.pitch)
             }, 200);
           });
         })

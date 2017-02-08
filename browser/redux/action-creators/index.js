@@ -25,10 +25,9 @@ export const finishRecording = dispatch => {
 	window.location.pathname = `/${sessionKey}/feedback`;
 };
 
-export const updateLoudness = loudness => dispatch => {
-  firedux.update('speechData', { loudness });
-};
-
-export const updatePitch = pitchArray => dispatch => {
-  firedux.update('speechData', { pitchArray });
+export const updateData = (loudness, monotonyBool) => dispatch => {
+	firedux.update('speechData', {
+		pitch: monotonyBool,
+		loudness,
+	});
 };

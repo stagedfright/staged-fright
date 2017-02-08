@@ -5,7 +5,7 @@ import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
 import startRecordingUtil from './utils/startRecording';
-import pitchProcessingUtil from './utils/analyzeFrequency';
+import { default as pitchProcessingUtil, stdSemitones} from './utils/analyzeFrequency';
 
 import PitchTracker from '../PitchTracker';
 
@@ -24,8 +24,10 @@ export default class VRViewer extends Component {
     this.meterInterval = null;
 
     this.pitchRafId = null;
-
-    this.pitchDataPoints = this.props.pitch || [];
+    this.pitch = this.props.pitch || false;
+    this.pitchInterval = null;
+    //an array of pitch measures, in MIDI values. Stores up to ten seconds' worth of data at once. 
+    this.pitchDataPoints = [ 40 ];
 
     this.processPitch = pitchProcessingUtil.bind(this);
 
@@ -67,6 +69,7 @@ export default class VRViewer extends Component {
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
     soundMeter.stop();
     clearInterval(this.meterInterval);
+    clearInterval(this.pitchInterval);
   }
 
   tick = time => {
@@ -80,6 +83,7 @@ export default class VRViewer extends Component {
     const { at, loading } = this.state
     const scene = document.querySelector('a-scene');
     var volume = this.props.loudness * 30;
+    var pitch = this.pitch;
 
     if (this.state.override || navigator.userAgent.match('Mobi')) {
 
@@ -99,7 +103,7 @@ export default class VRViewer extends Component {
               <a-camera>
               </a-camera>
             </a-entity>
-            <PitchTracker points={this.pitchDataPoints} />
+            <PitchTracker pitch={pitch} />
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
