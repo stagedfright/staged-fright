@@ -9,6 +9,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   syncLoudness: (loudness) => {
     dispatch(updateLoudness(loudness));
+  },
+  handleClick: () => {
+    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
+    soundMeter.stop();
+    clearInterval(this.meterInterval);
   }
 })
 
