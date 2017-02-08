@@ -4,7 +4,7 @@ const sessionKey = firedux.ref.key;
 
 export const submitSpeechData = fields => dispatch => {
   firedux.set('speechData', fields)
-  .then(dispatch(push(`/${sessionKey}/practice`)));
+  .then(dispatch(push(`/${sessionKey}/choose-view`)));
 };
 
 export const populatePremadeSpeech = id => dispatch => {

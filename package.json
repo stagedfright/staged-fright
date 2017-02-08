@@ -56,6 +56,7 @@
     "serve-favicon": "^2.3.2",
     "standard": "^8.5.0",
     "volleyball": "^1.4.1",
+    "watson-developer-cloud": "^2.17.0",
     "webpack": "^1.13.3"
   }
 }
