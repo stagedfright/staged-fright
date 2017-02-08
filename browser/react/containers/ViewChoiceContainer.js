@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateLoudness(loudness));
   },
   handleClick: () => {
-    console.log('ON CLICK TOTALLY WORKED')
     this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
     soundMeter.stop();
     clearInterval(this.meterInterval);
