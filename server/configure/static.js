@@ -1,9 +1,8 @@
-import path from 'path';
-import express from 'express';
-import favicon from 'serve-favicon';
+const path = require('path');
+const express = require('express');
+const favicon = require('serve-favicon');
 
-// Serve up my chosen static files as well as my favicon.
-export default (app) => {
+module.exports = (app) => {
   const root = app.getValue('projectRoot');
 
   const npmPath = path.join(root, './node_modules');

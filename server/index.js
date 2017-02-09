@@ -1,8 +1,8 @@
 'use strict';
 
-import express from 'express';
-import chalk from 'chalk';
-import configServer from './configure';
+const express = require('express');
+const chalk = require('chalk');
+const configServer = require('./configure');
 const app = express();
 configServer(app);
 
@@ -17,4 +17,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-export default app;
+module.exports = app;

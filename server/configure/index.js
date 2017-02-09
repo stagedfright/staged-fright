@@ -1,10 +1,10 @@
 'use strict';
 
-import setVariables from './app-variables';
-import setParsing from './parsing';
-import setStatic from './static';
+const setVariables = require('./app-variables');
+const setParsing = require('./parsing');
+const setStatic = require('./static');
 
-export default (app) => {
+module.exports = (app) => {
   // Force the context of this.
   app.setValue = app.set.bind(app);
   // Make a function that gets the path to this app.

@@ -1,21 +1,11 @@
-##Staged Fright
+#################
+# Staged Fright #
+#################
 
-This builds off of Eliot's React/Aframe boilerplate, Meme Magic.
+Staged Fright is a public speaking simulator that lets you train your speaking skills in immersive 360 virtual reality. The application includes features such as a VR teleprompter that scrolls the speechtext on-screen, real-time volume feedback, and real-time pitch tracking.
 
-  Set up:
+Set up:
 
-    1. $ createdb staged-fright (just for the first time, obvs)
-
-    2. Make a `secrets.js` file in the root directory.
-      (Also just to start; the secrets file is already in the .gitignore)
-
-      It should contain:
-
-        export default {
-          SessionKey: 'WhateverYouWant'
-        };
-
-
-    3. $ npm install
-    4. $ npm start
-    5. go to localhost:3001
+    1. $ npm install
+    2. $ npm start
+    3. go to localhost:3001

@@ -1,10 +1,8 @@
 'use strict';
 
-import BP from 'body-parser';
+const BP = require('body-parser');
 
-export default (app) => {
-  // Enable body parser.
+module.exports = (app) => {
   app.use(BP.json());
   app.use(BP.urlencoded({extended: true}));
-
 };
