@@ -1,7 +1,9 @@
 'use strict';
 
-import app from './server';
-import chalk from 'chalk';
+
+
+const app = require('./server');
+const chalk = require('chalk');
 
 const _Port = 3001;
 
