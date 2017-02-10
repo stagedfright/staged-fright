@@ -37,13 +37,11 @@ export default class VRViewer extends Component {
     this.tick(window.performance.now());
     this.props.startAudio();
 
-    setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
+    setTimeout(this.props.stopAudio, this.doneSpeaking + this.initRecording);
     setTimeout(this.startApplause, this.doneSpeaking);
   }
 
   componentWillUnmount () {
-    console.log('unmounting- stop the audio!!!');
-    this.props.stopAudio();
     cancelAnimationFrame(this.tickRafId);
   }
 

@@ -102,7 +102,7 @@ class AudioSession extends Component {
         if (nextProps.recording && !this.state.recording) {
             this.startRecording();
         } else {
-            if (this.state.recording && !nextProps.recording) {
+            if (nextProps.recording === false && this.state.recording) {
                 this.stopRecording();
             }
         }

@@ -33,11 +33,9 @@ export const sendFeedback = fields => dispatch => {
 };
 
 export const updateData = (loudness, monotonyBool) => dispatch => {
-	// This dispatch is called from the AudioSession component. Since Firedux sends back updated snapshots optimistically, updating only 'pitch' and 'loudness' in this action causes the 'recording' prop to be momentarily 'undefined' for the AudioSession component between the optimistic update and syncing back with the whole Firebase ref after the update. Because of the way the ComponentWillReceiveProps hook in AudioSession works, this causes recording to cut out on the first updateData dispatch. To make sure AudioSession never loses the 'recording' prop (i.e. so that it never stops recording), we include 'recording: true' here. 
 	firedux.update('speechData', {
 		pitch: monotonyBool,
-		loudness,
-		recording: true,
+		loudness
 	});
 };
 
