@@ -96,7 +96,7 @@ export default class VRViewer extends Component {
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
-                line, idx, position: [3, scrollOffset - idx, 1.3]
+                line, idx, position: [3, scrollOffset - (idx * 0.8), 1.3]
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
