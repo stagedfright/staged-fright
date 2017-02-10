@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import InitialLoading from '../InitialLoading';
-import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
 import 'aframe';
@@ -17,8 +16,6 @@ export default class VRViewer extends Component {
       loading: true,
       clap: false,
     }
-
-    this.meterInterval = null;
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -44,10 +41,10 @@ export default class VRViewer extends Component {
     setTimeout(this.startApplause, this.doneSpeaking);
   }
 
-  //dispatch stuff in CWU to stop audio stream
   componentWillUnmount () {
-    cancelAnimationFrame(this.tickRafId);
+    console.log('unmounting- stop the audio!!!');
     this.props.stopAudio();
+    cancelAnimationFrame(this.tickRafId);
   }
 
   tick = time => {

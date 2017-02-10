@@ -1,21 +1,13 @@
-import DesktopVRView from '../components/DesktopVRView';
+import ViewChoice from '../components/ViewChoice';
 import { connect } from 'react-redux';
-import { finishRecording, stopRecording} from '../../redux/action-creators';
+import { stopRecording } from '../../redux/action-creators';
 
 const mapDispatchToProps = dispatch => ({
-  showSummary: () => {
-    dispatch(finishRecording);
-  },
-
-  stopAudio: () => {
-    dispatch(stopRecording);
-  },
-
   handleClick: () => {
     dispatch(stopRecording);
-    dispatch(finishRecording);
+    // stops recording and moves to summary page
   }
 
 })
 
-export default connect(null, mapDispatchToProps)(DesktopVRView);
+export default connect(null, mapDispatchToProps)(ViewChoice);

@@ -27,7 +27,6 @@ var SoundMeter = function(context) {
 }
 
 SoundMeter.prototype.connectToSource = function(stream, callback) {
-  console.log('SoundMeter connecting');
   try {
     this.mic = this.context.createMediaStreamSource(stream);
     this.mic.connect(this.script);
@@ -50,10 +49,11 @@ SoundMeter.prototype.stop = function() {
 
 //PITCH STUFF
 	//The difference between two MIDI values is the semitone interval between the two notes.
+	//The function stdSemitones takes the standard deviation of an array of MIDI values, which is an indicator of pitch variation. 
 	const stdSemitones = (arrOfMIDI) => {
-	    return math.std(arrOfMIDI);
+	    return arrOfMIDI.length && math.std(arrOfMIDI);
 	};
-
+	
 	const freqToMIDI = (freq) => {
 	    var log = Math.log(freq / 440) / Math.LN2;
 	    var noteNumber = Math.round(12 * log) + 57;

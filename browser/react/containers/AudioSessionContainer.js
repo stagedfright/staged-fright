@@ -15,14 +15,6 @@ const mapDispatchToProps = dispatch => ({
   syncData: (loudness, monotonyBool) => {
     dispatch(updateData(loudness, monotonyBool));
   },
-
-  startAudio: () => {
-    dispatch(startRecording);
-  },
-
-  stopAudio: () => {
-    dispatch(stopRecording);
-  }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioSession);
