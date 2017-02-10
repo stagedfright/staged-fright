@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import HelpHint from '../HelpHint';
 import HelpNote from '../HelpNote';
+import HowTo from '../HowTo';
 import styles from './styles';
 import { teal300 } from 'material-ui/styles/colors';
 import startRecordingUtil from '../VRViewer/utils/startRecording';
 import { default as pitchProcessingUtil, stdSemitones} from '../VRViewer/utils/analyzeFrequency';
-
 import { VRButton } from '../uiElements';
 
 class DesktopVRView extends Component {
     constructor(props) {
         super(props);
+
+        this.state = { showHint: false };
 
         this.startRecording = startRecordingUtil.bind(this);
         this.meterInterval = null
@@ -21,10 +23,15 @@ class DesktopVRView extends Component {
         this.pitch = this.props.pitch || false;
         //an array of pitch measures, in MIDI values. Stores up to ten seconds' worth of data at once. 
         this.pitchDataPoints = [ 40 ];
-
         this.processPitch = pitchProcessingUtil.bind(this);
+        this.onHint = this.onHint.bind(this);
 
     }
+
+    onHint() {
+        console.log('GOT INTO on Hint !!!!!!!!!!!!!!!');
+        this.setState({ showHint: true});
+    } 
 
     componentDidMount() {
         setTimeout(this.startRecording, 4000);
@@ -42,6 +49,24 @@ class DesktopVRView extends Component {
                       </span>
                     </h4>
                 </div>
+                <div className="row padded" style={styles.padded}>
+                    <div className="col s12">
+                        <h4 className="center" style={styles.center}>First Time User?</h4>
+                        <p className="center" style={styles.center}>Click the button below to view helpful hints</p>
+                        <div className="col s4">
+                        </div>
+                        <div className="col s4" onClick={this.onHint} >
+                            <VRButton label={"Hint"} color={teal300} type={"submit"} />
+                        </div>
+                        <div className="col s4">
+                        </div>
+
+                    </div>
+                    <div className="col s12">
+                        { this.state.showHint ? <HowTo /> : null }
+                    </div>
+                </div>
+                
                 <div className="col s6">
                     <div className="padded" style={styles.padded}>
                         <h4 className="center" style={styles.center}>Continue on Mobile</h4>
