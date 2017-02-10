@@ -6,8 +6,14 @@ const mapDispatchToProps = dispatch => ({
   handleClick: () => {
     dispatch(stopRecording);
     // stops recording and moves to summary page
-  }
+  },
 
+  onHint: () => {
+    }
 })
 
-export default connect(null, mapDispatchToProps)(ViewChoice);
+const mapStateToProps = (state) => ({
+  showHint: false
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewChoice);

@@ -15,9 +15,9 @@ import {
   NewSpeechFormContainer,
   FeedbackFormContainer,
   SelectContainer,
-  ViewChoiceContainer,
   AudioSessionContainer
 } from './containers';
+import ViewChoice from './components/ViewChoice';
 import SplashScreen from './components/SplashScreen';
 
 
@@ -42,7 +42,7 @@ const render = () =>
             <Route path='home' component={SplashScreen} />
             <Route path='select' component={SelectContainer} />
             <Route path='new-speech' component={NewSpeechFormContainer} />
-            <Route path='choose-view' component={ViewChoiceContainer} />
+            <Route path='choose-view' component={ViewChoice} />
             <Route path='practice' component={VRViewerContainer} />
             <Route path='feedback' component={FeedbackFormContainer} />
           </Route>
