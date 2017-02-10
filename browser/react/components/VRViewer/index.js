@@ -4,7 +4,7 @@ import InitialLoading from '../InitialLoading';
 import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
-
+import 'aframe';
 import PitchTracker from '../PitchTracker';
 
 export default class VRViewer extends Component {
@@ -43,6 +43,7 @@ export default class VRViewer extends Component {
     setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
   }
 
+  //dispatch stuff in CWU to stop audio stream 
   componentWillUnmount () {
     cancelAnimationFrame(this.tickRafId);
     cancelAnimationFrame(this.pitchRafId);
