@@ -1,6 +1,6 @@
 import VRViewer from '../components/VRViewer';
 import { connect } from 'react-redux';
-import { finishRecording, startRecording, stopRecording} from '../../redux/action-creators';
+import { startRecording, stopRecording } from '../../redux/action-creators';
 
 const mapStateToProps = state => ({
   speechLines: state.get('data').speechData.speechLines,
@@ -10,18 +10,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  showSummary: () => {
-    dispatch(finishRecording);
-  },
 
   startAudio: () => {
     dispatch(startRecording);
   },
 
   stopAudio: () => {
-    dispatch(stopRecording);
-    dispatch(finishRecording);
-    //TO DO: combine finish recording and stop recording
+    // stops recording and moves to summary page
+    dispatch(stopRecording); 
   }
 })
 

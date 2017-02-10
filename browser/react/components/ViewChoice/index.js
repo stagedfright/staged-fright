@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import HelpHint from '../HelpHint';
 import HelpNote from '../HelpNote';
 import styles from './styles';
@@ -7,7 +7,7 @@ import { teal300 } from 'material-ui/styles/colors';
 
 import { VRButton } from '../uiElements';
 
-const DesktopVRView = (props) => (
+const ViewChoice = (props) => (
     <div className="container">
         <div className="row">
             <div className="col s12" style={{backgroundColor: teal300 }} >
@@ -54,4 +54,4 @@ const DesktopVRView = (props) => (
     </div>
 )
 
-export default DesktopVRView;
+export default ViewChoice;

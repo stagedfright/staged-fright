@@ -11,7 +11,7 @@ import { syncHistoryWithStore, push } from 'react-router-redux';
 import firedux from '../redux/store/firedux';
 
 import {
-  AppContainer,
+  VRViewerContainer,
   NewSpeechFormContainer,
   FeedbackFormContainer,
   SelectContainer,
@@ -43,7 +43,7 @@ const render = () =>
             <Route path='select' component={SelectContainer} />
             <Route path='new-speech' component={NewSpeechFormContainer} />
             <Route path='choose-view' component={ViewChoiceContainer} />
-            <Route path='practice' component={AppContainer} />
+            <Route path='practice' component={VRViewerContainer} />
             <Route path='feedback' component={FeedbackFormContainer} />
           </Route>
         </Router>
