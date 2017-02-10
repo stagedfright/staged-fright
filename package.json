@@ -9,7 +9,7 @@
   "author": "Staged-Fright Team",
   "license": "ISC",
   "dependencies": {
-    "aframe": "github:aframevr/aframe",
+    "aframe": "^0.5.0",
     "aframe-react": "^3.4.1",
     "babel": "^6.5.2",
     "babel-core": "^6.18.2",
