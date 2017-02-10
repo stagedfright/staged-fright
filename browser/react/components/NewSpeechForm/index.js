@@ -8,7 +8,7 @@ export default class NewSpeechForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wpm: props.wpm,
+      wpm: 140,
       speechText: props.speechLines,
     };
   }
