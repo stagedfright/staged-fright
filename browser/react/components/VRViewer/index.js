@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import InitialLoading from '../InitialLoading';
-import DesktopVRView from '../DesktopVRView';
 import VolumeBar from '../VolumeBar';
 import SpeechLine from '../SpeechLines';
-
+import 'aframe';
 import PitchTracker from '../PitchTracker';
 
 export default class VRViewer extends Component {
@@ -17,8 +16,6 @@ export default class VRViewer extends Component {
       loading: true,
       clap: false,
     }
-
-    this.meterInterval = null;
 
     this.speechLines = this.props.speechLines;
     // this coefficient adjust the text scrolling speed based on user provided WMP value
@@ -38,18 +35,14 @@ export default class VRViewer extends Component {
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
+    this.props.startAudio();
 
-    setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
-    setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
+    setTimeout(this.props.stopAudio, this.doneSpeaking + this.initRecording);
+    setTimeout(this.startApplause, this.doneSpeaking);
   }
 
   componentWillUnmount () {
     cancelAnimationFrame(this.tickRafId);
-    cancelAnimationFrame(this.pitchRafId);
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
-    soundMeter.stop();
-    clearInterval(this.meterInterval);
-    clearInterval(this.pitchInterval);
   }
 
   tick = time => {

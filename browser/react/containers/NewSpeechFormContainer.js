@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { submitSpeechData } from '../../redux/action-creators';
 
 const stripSpeechLines = lines => {
-  return lines.slice(3, lines.length - 3).join(' ');
+  return lines && lines.slice(3, lines.length - 3).join(' ');
 };
 
 const mapStateToProps = state => ({

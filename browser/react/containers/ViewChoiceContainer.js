@@ -1,23 +1,19 @@
-import DesktopVRView from '../components/DesktopVRView';
+import ViewChoice from '../components/ViewChoice';
 import { connect } from 'react-redux';
-import { updateData } from '../../redux/action-creators';
-
-const mapStateToProps = state => ({
-  loudness: state.get('data').speechData.loudness,
-  pitch: state.get('data').speechData.pitch,
-});
+import { stopRecording } from '../../redux/action-creators';
 
 const mapDispatchToProps = dispatch => ({
-  syncData: (loudness, monotonyBool) => {
-    dispatch(updateData(loudness, monotonyBool));
+  handleClick: () => {
+    dispatch(stopRecording);
+    // stops recording and moves to summary page
   },
 
-  handleClick: () => {
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
-    soundMeter.stop();
-    clearInterval(this.meterInterval);
-  }
-
+  onHint: () => {
+    }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DesktopVRView);
+const mapStateToProps = (state) => ({
+  showHint: false
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewChoice);

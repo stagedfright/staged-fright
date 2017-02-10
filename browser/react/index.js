@@ -11,15 +11,15 @@ import { syncHistoryWithStore, push } from 'react-router-redux';
 import firedux from '../redux/store/firedux';
 
 import {
-  AppContainer,
+  VRViewerContainer,
   NewSpeechFormContainer,
   FeedbackFormContainer,
   SelectContainer,
-  ViewChoiceContainer
+  AudioSessionContainer
 } from './containers';
+import ViewChoice from './components/ViewChoice';
 import SplashScreen from './components/SplashScreen';
 
-import 'aframe';
 
 // Hack for mobile support for materialize-ui
 injectTapEventPlugin();
@@ -38,12 +38,14 @@ const render = () =>
       <MuiThemeProvider>
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path='/:sessionKey/home' component={SplashScreen} />
-          <Route path='/:sessionKey/select' component={SelectContainer} />
-          <Route path='/:sessionKey/new-speech' component={NewSpeechFormContainer} />
-          <Route path='/:sessionKey/choose-view' component={ViewChoiceContainer} />
-          <Route path='/:sessionKey/practice' component={AppContainer} />
-          <Route path='/:sessionKey/feedback' component={FeedbackFormContainer} />
+          <Route path='/:sessionKey' component={AudioSessionContainer}>
+            <Route path='home' component={SplashScreen} />
+            <Route path='select' component={SelectContainer} />
+            <Route path='new-speech' component={NewSpeechFormContainer} />
+            <Route path='choose-view' component={ViewChoice} />
+            <Route path='practice' component={VRViewerContainer} />
+            <Route path='feedback' component={FeedbackFormContainer} />
+          </Route>
         </Router>
       </Provider>
       </MuiThemeProvider>,
