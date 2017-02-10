@@ -38,19 +38,16 @@ export default class VRViewer extends Component {
   componentDidMount () {
     setTimeout(() => this.setState({ loading: false }), 3500);
     this.tick(window.performance.now());
+    this.props.startAudio();
 
     setTimeout(this.props.showSummary, this.doneSpeaking + this.initRecording);
-    setTimeout(this.startApplause, this.doneSpeaking + this.initRecording - 5000);
+    setTimeout(this.startApplause, this.doneSpeaking);
   }
 
-  //dispatch stuff in CWU to stop audio stream 
+  //dispatch stuff in CWU to stop audio stream
   componentWillUnmount () {
     cancelAnimationFrame(this.tickRafId);
-    cancelAnimationFrame(this.pitchRafId);
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
-    soundMeter.stop();
-    clearInterval(this.meterInterval);
-    clearInterval(this.pitchInterval);
+    this.props.stopAudio();
   }
 
   tick = time => {

@@ -22,12 +22,24 @@ export const sendFeedback = fields => dispatch => {
 
 export const finishRecording = dispatch => {
 	//redirects instead of a push as a way to get over component mounting scroll problems
-	window.location.pathname = `/${sessionKey}/feedback`;
+	dispatch(push(`/${sessionKey}/feedback`));
 };
 
 export const updateData = (loudness, monotonyBool) => dispatch => {
 	firedux.update('speechData', {
 		pitch: monotonyBool,
 		loudness,
+	});
+};
+
+export const startRecording = dispatch => {
+	firedux.update('speechData', {
+		recording: true,
+	});
+};
+
+export const stopRecording = dispatch => {
+	firedux.update('speechData', {
+		recording: false,
 	});
 };

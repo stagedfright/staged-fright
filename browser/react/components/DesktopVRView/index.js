@@ -26,8 +26,8 @@ const DesktopVRView = (props) => (
                     </ul>
                     <p style={{fontSize: '18px'}}><strong>{window.location.href.replace(/choose-view/, "practice")}</strong></p>
                     <br/>
-                    <Link to={`/${this.props.params.sessionKey}/feedback`}>
-                        <VRButton label={"Click here when mobile VR finishes"} color={teal300} type={"submit"} onClick={this.props.handleClick} />
+                    <Link to={`/${props.params.sessionKey}/feedback`}>
+                        <VRButton label={"Click here when mobile VR finishes"} color={teal300} type={"submit"} onClick={props.handleClick} />
                     </Link>
                     <HelpNote />
                 </div>
@@ -41,7 +41,7 @@ const DesktopVRView = (props) => (
                     </ul>
                     <div>
                         <br/>
-                        <Link to={`/${this.props.params.sessionKey}/practice`}>
+                        <Link to={`/${props.params.sessionKey}/practice`}>
                             <VRButton label={"Continue"} color={teal300} type={"submit"} />
                         </Link>
                         <br/>

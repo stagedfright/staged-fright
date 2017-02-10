@@ -1,23 +1,21 @@
 import DesktopVRView from '../components/DesktopVRView';
 import { connect } from 'react-redux';
-import { updateData } from '../../redux/action-creators';
-
-const mapStateToProps = state => ({
-  loudness: state.get('data').speechData.loudness,
-  pitch: state.get('data').speechData.pitch,
-});
+import { finishRecording, stopRecording} from '../../redux/action-creators';
 
 const mapDispatchToProps = dispatch => ({
-  syncData: (loudness, monotonyBool) => {
-    dispatch(updateData(loudness, monotonyBool));
+  showSummary: () => {
+    dispatch(finishRecording);
+  },
+
+  stopAudio: () => {
+    dispatch(stopRecording);
   },
 
   handleClick: () => {
-    this.stream && this.stream.getAudioTracks().forEach(track => track.stop())
-    soundMeter.stop();
-    clearInterval(this.meterInterval);
+    dispatch(stopRecording);
+    dispatch(finishRecording);
   }
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DesktopVRView);
+export default connect(null, mapDispatchToProps)(DesktopVRView);

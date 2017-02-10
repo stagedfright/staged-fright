@@ -15,9 +15,11 @@ import {
   NewSpeechFormContainer,
   FeedbackFormContainer,
   SelectContainer,
-  ViewChoiceContainer
+  ViewChoiceContainer,
+  AudioSessionContainer
 } from './containers';
 import SplashScreen from './components/SplashScreen';
+
 
 // Hack for mobile support for materialize-ui
 injectTapEventPlugin();
@@ -36,7 +38,7 @@ const render = () =>
       <MuiThemeProvider>
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path='/:sessionKey' component={AudioSession}> 
+          <Route path='/:sessionKey' component={AudioSessionContainer}>
             <Route path='home' component={SplashScreen} />
             <Route path='select' component={SelectContainer} />
             <Route path='new-speech' component={NewSpeechFormContainer} />

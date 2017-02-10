@@ -11,6 +11,7 @@ export default class NewSpeechForm extends Component {
       wpm: props.wpm,
       speechText: props.speechLines,
     };
+    console.log("PROPS INSIDE NEW SPEECH FORM COMPONENT ", props)
   }
 
   handleChange = field => event => {

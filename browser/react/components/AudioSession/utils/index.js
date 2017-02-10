@@ -1,10 +1,8 @@
 import math from 'mathjs';
 
 //VOLUME STUFF
-
-module.exports = { SoundMeter };
-
-function SoundMeter(context) {
+//TO DO: refactor soundMeter code to ES6
+var SoundMeter = function(context) {
   this.context = context;
   this.instant = 0.0;
   this.slow = 0.0;
@@ -50,11 +48,11 @@ SoundMeter.prototype.stop = function() {
   this.script.disconnect();
 };
 
-//PITCH STUFF 
-	//The difference between two MIDI values is the semitone interval between the two notes. 
+//PITCH STUFF
+	//The difference between two MIDI values is the semitone interval between the two notes.
 	const stdSemitones = (arrOfMIDI) => {
 	    return math.std(arrOfMIDI);
-	}; 
+	};
 
 	const freqToMIDI = (freq) => {
 	    var log = Math.log(freq / 440) / Math.LN2;
@@ -64,21 +62,21 @@ SoundMeter.prototype.stop = function() {
 
 	const findFundamentalFreq = (buffer, sampleRate) => {
 		// We use autocorrelation to find the fundamental frequency.
-		
-		// In order to correlate the signal with itself (hence the name of the algorithm), we will check two points 'k' frames away. 
+
+		// In order to correlate the signal with itself (hence the name of the algorithm), we will check two points 'k' frames away.
 		// The autocorrelation index will be the average of these products. At the same time, we normalize the values.
 		// Source: http://www.phy.mty.edu/~suits/autocorrelation.html
 
-		// the default sample rate, depending on the hardware, is 44100Hz or 48000Hz. 
-		// a 'k' range between 120 and 650 covers signals ranging from ~70Hz to ~350Hz, which is just a little broader than the average frequency range for human speech (80-260Hz, per Wikipedia). 
+		// the default sample rate, depending on the hardware, is 44100Hz or 48000Hz.
+		// a 'k' range between 120 and 650 covers signals ranging from ~70Hz to ~350Hz, which is just a little broader than the average frequency range for human speech (80-260Hz, per Wikipedia).
 		var n = 1024, bestR = 0, bestK = -1;
 		for(var k = 120; k <= 650; k++){
 			var sum = 0;
-			
+
 			for(var i = 0; i < n; i++){
 				sum += ((buffer[i] - 128) / 128) * ((buffer[i + k] - 128) / 128);
 			}
-			
+
 			var r = sum / (n + k);
 
 			if(r > bestR){
@@ -91,7 +89,7 @@ SoundMeter.prototype.stop = function() {
 				break;
 			}
 		}
-		
+
 		if(bestR > 0.0025) {
 			// The period (in frames) of the fundamental frequency is 'bestK'. Getting the frequency from there is trivial.
 			var fundamentalFreq = sampleRate / bestK;
@@ -103,4 +101,4 @@ SoundMeter.prototype.stop = function() {
 		}
 	};
 
-export { findFundamentalFreq, freqToMIDI, stdSemitones };
+export { findFundamentalFreq, freqToMIDI, stdSemitones, SoundMeter };

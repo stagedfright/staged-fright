@@ -8,6 +8,7 @@ const initialState = Map({
   locationBeforeTransitions: null,
   loudness: 0,
   pitch: false,
+  recording: false
 });
 
 export default initialState;

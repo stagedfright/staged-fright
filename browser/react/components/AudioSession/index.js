@@ -1,44 +1,46 @@
 import React, { Component } from 'react';
-import { stdSemitones, freqToMIDI, findFundamentalFreq } from './utils';
+import { stdSemitones, freqToMIDI, findFundamentalFreq, SoundMeter } from './utils';
 
-//put all audio stuff in a component that doesn't render anything, conncet to store, put it at the top of your page so it never goesa way, and dispatch things as needed to start/stop 
+//put all audio stuff in a component that doesn't render anything, conncet to store, put it at the top of your page so it never goesa way, and dispatch things as needed to start/stop
 
 class AudioSession extends Component {
     constructor(props) {
         super(props);
 
-        this.startRecording = startRecordingUtil.bind(this);
-        this.meterInterval = null
+        this.state = {
+            recording: false
+        }
+
+        this.startRecording = this.startRecording.bind(this);
+        this.stopRecording = this.stopRecording.bind(this);
+        this.meterInterval = null;
         this.pitchInterval = null;
 
         this.pitchRafId = null;
-        this.pitch = this.props.pitch || false;
-        //an array of pitch measures, in MIDI values. Stores up to ten seconds' worth of data at once. 
+        this.pitch = props.pitch || false;
+        //an array of pitch measures, in MIDI values. Stores up to ten seconds' worth of data at once.
         this.pitchDataPoints = [ 40 ];
 
-        this.processPitch = pitchProcessingUtil.bind(this);
+        this.processPitch = this.processPitch.bind(this);
 
-    }
-
-    componentDidMount() {
-        setTimeout(this.startRecording, 4000);
-        setTimeout(this.processPitch, 6000);
     }
 
     startRecording() {
+        console.log("START RECORDING IS RECORDING FROM AUDIO SESSIONS PART 1")
+        if (navigator.userAgent.match('Mobi')) return;
         navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia ||
           navigator.webkitGetUserMedia ||
           navigator.mozGetUserMedia ||
           navigator.msGetUserMedia);
-
+        console.log("START RECORDING IS RECORDING FROM AUDIO SESSIONS PART 2")
         this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        var source;
-        var stream;
 
         if (navigator.mediaDevices.getUserMedia) {
            navigator.mediaDevices.getUserMedia({ audio: true })
            .then((stream) => {
               this.stream = stream
+              this.processPitch(this.audioCtx, this.stream)
+              console.log("AUDIO CONTEXT: ", this.audioCtx, "STREAM: ", stream);
               var soundMeter = window.soundMeter = new SoundMeter(this.audioCtx);
 
               soundMeter.connectToSource(stream, (e) => {
@@ -47,6 +49,7 @@ class AudioSession extends Component {
                   return;
                 }
                 this.meterInterval = setInterval(() => {
+                    console.log("SOUND METER ", soundMeter.slow.toFixed(2), this.pitch)
                   this.props.syncData(soundMeter.slow.toFixed(2), this.pitch)
                 }, 200);
               });
@@ -55,23 +58,22 @@ class AudioSession extends Component {
         }
     }
 
-    streamReceived() {
-        const micStream = this.stream; //when refactoring, pass in a stream bc this is opaque 
+    processPitch(context, stream) {
 
-        const analyserAudioNode = this.audioCtx.createAnalyser();
+        const analyserAudioNode = context.createAnalyser();
         analyserAudioNode.fftSize = 2048;
 
-        const sourceAudioNode = this.audioCtx.createMediaStreamSource(micStream);
+        const sourceAudioNode = context.createMediaStreamSource(stream);
         sourceAudioNode.connect(analyserAudioNode);
 
         const detectPitch = () => {
 
             var buffer = new Uint8Array(analyserAudioNode.fftSize);
-            this.pitchDataPoints = this.pitchDataPoints.length > 249 ? this.pitchDataPoints.slice(1, 250) : this.pitchDataPoints.slice(); 
+            this.pitchDataPoints = this.pitchDataPoints.length > 249 ? this.pitchDataPoints.slice(1, 250) : this.pitchDataPoints.slice();
             //hacky workaround for extensibility error
 
-            var bufferLength = analyserAudioNode.fftSize; 
-            analyserAudioNode.getByteTimeDomainData(buffer); 
+            var bufferLength = analyserAudioNode.fftSize;
+            analyserAudioNode.getByteTimeDomainData(buffer);
             var fundamentalFreq = findFundamentalFreq(buffer, this.audioCtx.sampleRate);
             if (fundamentalFreq !== -1) {
                 this.pitchDataPoints.push(freqToMIDI(fundamentalFreq));
@@ -85,11 +87,31 @@ class AudioSession extends Component {
             const monotonyBool = stdSemi < 3.5
             this.pitch = monotonyBool;
         }, 500);
-    };
+    }
+
+    stopRecording() {
+        cancelAnimationFrame(this.pitchRafId);
+        this.stream && this.stream.getAudioTracks().forEach(track => track.stop());
+        soundMeter.stop();
+        clearInterval(this.meterInterval);
+        clearInterval(this.pitchInterval);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("THIS IS NEXT PROPS IN AUDIO SESSION", nextProps)
+        if (nextProps.recording && !this.state.recording) {
+            this.startRecording();
+            this.setState({
+                recording: true
+            })
+        } else {
+            this.state.recording && this.stopRecording();
+        }
+    }
 
     render() {
         return(<div>{ this.props.children }</div>)
     }
 }
 
-export default DesktopVRView;
+export default AudioSession;
