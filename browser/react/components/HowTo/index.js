@@ -15,18 +15,18 @@ class HowTo extends Component {
   render() {
     return (
       <div style={styles.padded}>
-        The speech you just entered on the previous page has been formatted for you and will be scrolled at the speed selected.
+        The speech you entered on the previous page has been formatted into lines, which will be scrolled at the speaking rate you selected.
         <br/>
-        In addition to the speech text there will also be 2 graphic indicators providing you with a visual feedback of your performace:
+        In addition to the on-screen teleprompter, StagedFright's graphic overlay also includes 2 indicators displaying real-time visual feedback on your performance:
         <br/>
         <div className="col s6">
           <ul className="list" style={styles.list}>
-            <li className="list" style={styles.list}><strong>Volume Bar</strong>: The volume bar will indicate how well you’re projecting your voice. Green will indicate that you’re speaking at a loud enough level.</li>
-            <li className="list" style={styles.list}><strong>Pitch Detector</strong>: The pitch detector looks at 10 second increments of your tone of voice, and determines whether or not you’re modulating your voice (green) or if you sound monotonous (yellow).</li>
+            <li className="list" style={styles.list}><strong>Volume Bar</strong>: The volume bar measures how well you’re projecting your voice. When it's green, you’re speaking at a loud enough level.</li>
+            <li className="list" style={styles.list}><strong>Pitch Detector</strong>: The pitch detector measures changes in the tone of your voice, and will turn yellow if you speak in a monotone.</li>
           </ul>
           <br/>
           <p>
-            <strong>Important Note</strong>: Whether or not you proceed on desktop or mobile, your voice will be recorded via your desktop browser. Therefore please stay near your desktop to get good results with real-time feedback!
+            <strong>Important Note</strong>: Whether you proceed on desktop or mobile, your voice will be recorded via your desktop browser. Therefore, please remain near your desktop for the most accurate real-time feedback!
           </p>
         </div>
         <div className="col s6">
