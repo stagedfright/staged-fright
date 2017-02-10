@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
         aLine = '';
       } else aLine += ((arr[i++])+' ');
     }
+    if (aLine !== '') speech.push(aLine);
     return speech;
   }
 
