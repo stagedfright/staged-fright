@@ -65,7 +65,7 @@ export default class NewSpeechForm extends Component {
             </form>
           </div>
           <div className="col s6">
-            <img src="/speech-writer.gif" style={{ width: '100%', padding: '4.8vw 0vw 2vw 2vw' }}/>
+            <img src="/assets/images/speech-writer.gif" style={{ width: '100%', padding: '4.8vw 0vw 2vw 2vw' }}/>
           </div>
         </div>
       </div>

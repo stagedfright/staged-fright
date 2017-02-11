@@ -30,7 +30,7 @@ class HowTo extends Component {
           </p>
         </div>
         <div className="col s6">
-          <img src="/screenshot.png" style={{ width: '100%', padding: '20px' }}/>
+          <img src="/assets/images/screenshot.png" style={{ width: '100%', padding: '20px' }}/>
         </div>
       </div>
     );

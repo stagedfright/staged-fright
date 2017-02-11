@@ -13,42 +13,42 @@ const SpeechSelectList = ({ pickPremadeSpeech }) => (
       <ListItem 
         onClick={() => pickPremadeSpeech('gettysburgaddress')}
         primaryText="Gettysburg Address (~2 min)"
-        leftAvatar={<Avatar src="/lincoln.jpeg" />}
+        leftAvatar={<Avatar src="/assets/images/lincoln.jpeg" />}
         rightIcon={<CommunicationChatBubble />}
       />
       <Divider />
       <ListItem
         onClick={() => pickPremadeSpeech('ihaveadream')}
         primaryText="I Have A Dream (~2 min)"
-        leftAvatar={<Avatar src="/mlk.jpg" />}
+        leftAvatar={<Avatar src="/assets/images/mlk.jpg" />}
         rightIcon={<CommunicationChatBubble />}
       />
       <Divider />
       <ListItem
         onClick={() => pickPremadeSpeech('thencamethewar')}
         primaryText="Then Came The War (~3 min)"
-        leftAvatar={<Avatar src="/yuri.jpg" />}
+        leftAvatar={<Avatar src="/assets/images/yuri.jpg" />}
         rightIcon={<CommunicationChatBubble />}
       />
       <Divider />
       <ListItem
         onClick={() => pickPremadeSpeech('womensrights')}
         primaryText="Women's Rights Are Human Rights (~3 min)"
-        leftAvatar={<Avatar src="/hillary.png" />}
+        leftAvatar={<Avatar src="/assets/images/hillary.png" />}
         rightIcon={<CommunicationChatBubble />}
       />
       <Divider />
       <ListItem
         onClick={() => pickPremadeSpeech('independenceday')}
         primaryText="Independence Day (~2 min)"
-        leftAvatar={<Avatar src="/indyday.jpg" />}
+        leftAvatar={<Avatar src="/assets/images/indyday.jpg" />}
         rightIcon={<CommunicationChatBubble />}
       />
       <Divider />
       <ListItem
         onClick={() => pickPremadeSpeech('pi')}
         primaryText="The First 100 Digits of Pi (~1 min)"
-        leftAvatar={<Avatar src="/pi.jpeg" />}
+        leftAvatar={<Avatar src="/assets/images/pi.jpeg" />}
         rightIcon={<CommunicationChatBubble />}
       />
     </List>

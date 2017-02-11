@@ -40,7 +40,7 @@ export default {
 	  margin: '2vw',
 	  textAlign: 'center',
 	  display: 'inline-block',
-	  backgroundImage: 'url(/newspch.gif)',
+	  backgroundImage: 'url(/assets/images/newspch.gif)',
 	  backgroundSize: '70vh 70vh',
 	},
 
@@ -50,7 +50,7 @@ export default {
 	  margin: '5vw',
 	  textAlign: 'center',
 	  display: 'inline-block',
-	  backgroundImage: 'url(/oldspch.gif)',
+	  backgroundImage: 'url(/assets/images/oldspch.gif)',
 	  backgroundSize: '60vh 60vh',
 	},
 };
