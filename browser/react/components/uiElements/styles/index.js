@@ -39,7 +39,6 @@ export default {
 	  width: '40vw',
 	  margin: '2vw',
 	  textAlign: 'center',
-	  verticalAlign: 'middle',
 	  display: 'inline-block',
 	  backgroundImage: 'url(/speechbubble.png)',
 	  backgroundRepeat: 'no-repeat',
