@@ -64,7 +64,7 @@ export default class FeedbackForm extends Component {
           <div className="col" style={styles.flowCol} >
             <h4>
               <span className='flow-text' style={{color: '#FFFFFF'}}>
-                  Thanks for trying out StagedFright! Tell us what your experience was like by filling out the short survey below. (Click on each question to answer it.)
+                  Thanks for trying out StagedFright! StagedFright is an application in development, and the team highly values your input. Please tell us what your experience was like by filling out the short survey below. (Click on each question to answer it.)
                   <br/>
               </span>
             </h4>
@@ -98,7 +98,7 @@ export default class FeedbackForm extends Component {
             <SelectField
               value={this.state.usability}
               handleChange={this.handleSelectChange('usability')}
-              label={'How easy was it to use StagedFright? (1 = like taking candy from a baby; 5 = like Theseus slaying the Minotaur)'}
+              label={'How easy/intuitive was it for you to use StagedFright? (1 = very difficult; 5 = like taking candy from a baby)'}
               opt1={'1'}
               opt2={'2'}
               opt3={'3'}
@@ -154,13 +154,12 @@ export default class FeedbackForm extends Component {
               value={this.state.mostwanted}
               handleChange={this.handleSelectChange('mostwanted')}
               label={`Which of the following features would you most like to see added to StagedFright? (If you feel very strongly about more than one feature, please tell us in the 'additional comments' section below!)` }
-              opt1={'Real-time pitch feedback (i.e. whether I am speaking too monotonously)'}
-              opt2={'Real-time enunciation feedback (i.e. whether I am speaking clearly)'}
+              opt1={`Ability to invite others to 'join the audience' and listen to your speech practice in real-time`}
+              opt2={'Real-time enunciation feedback (i.e. whether you are speaking clearly)'}
               opt3={'Analysis/data visualization of your performance after each practice session'}
               opt4={'Ability to control (e.g. pause, skip, rewind text scrolling) teleprompter/recording during practice'}
               opt5={'Ability to create an account and view your practice history/track performance over time'}
               opt6={'Additional settings to speak in/audiences to speak to'}
-              opt7={`Ability to invite others to 'join the audience' and listen to your speech practice in real-time`}
             />
             <br />
             <TextField
