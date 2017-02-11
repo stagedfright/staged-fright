@@ -35,13 +35,19 @@ export default {
 	},
 
 	newspchPaper: {
-	  height: '70vh',
+	  height: '60vh',
 	  width: '40vw',
 	  margin: '2vw',
 	  textAlign: 'center',
+	  verticalAlign: 'middle',
 	  display: 'inline-block',
-	  backgroundImage: 'url(/newspch.gif)',
-	  backgroundSize: '70vh 70vh',
+	  backgroundImage: 'url(/speechbubble.png)',
+	  backgroundRepeat: 'no-repeat',
+	  //backgroundSize: 'cover',
+	  backgroundPosition: 'center',
+	  paddingTop: '21vh',
+	  paddingRight: '3vh',
+	  fontSize: '1.5em'
 	},
 
 	oldspchPaper: {
