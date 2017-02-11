@@ -19,7 +19,7 @@ export default class SplashScreen extends Component {
 	componentWillMount() {
         const script = document.createElement('script');
 
-        script.src = '/video-resize.js';
+        script.src = '/scripts/video-resize.js';
         script.async = true;
 
         document.body.appendChild(script);
@@ -65,7 +65,7 @@ export default class SplashScreen extends Component {
 			    	id='background-video'
 			    	loop muted autoPlay>
 			        <source
-			        	src='/openingvid.mp4'
+			        	src='/assets/videos/openingvid.mp4'
 			        	type='video/mp4'/>
 			        Your browser does not support the video tag.
 			    </video>

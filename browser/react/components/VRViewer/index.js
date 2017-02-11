@@ -62,11 +62,11 @@ export default class VRViewer extends Component {
         return <InitialLoading />;
       } else return (
         <div style={styles.container}>
-        {this.state.clap && <audio src='/bravo.mp3' autoPlay></audio>}
+        {this.state.clap && <audio src='/assets/audio/bravo.mp3' autoPlay></audio>}
           <a-scene auto-enter-vr="false">
             <a-assets>
-              <audio src="/CrowdNoise4.mp3" autoPlay loop></audio>
-              <video muted id="mvp" autoPlay loop src="/DT_RNC.mp4" />
+              <audio src="/assets/audio/CrowdNoise4.mp3" autoPlay loop></audio>
+              <video muted id="mvp" autoPlay loop src="/assets/videos/DT_RNC.mp4" />
               <canvas id="my-canvas" crossOrigin="anonymous"></canvas>
             </a-assets>
             <a-videosphere src="#mvp"></a-videosphere>
