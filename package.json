@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html ",
-    "build": "webpack --config webpack.dist.config.js"
+    "build": "webpack --config webpack.dist.config.js",
+    "test": "mocha --compilers js:babel-register tests/*.test.js"
   },
   "repository": {
     "type": "git",
