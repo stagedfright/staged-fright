@@ -65,7 +65,8 @@ export default class NewSpeechForm extends Component {
             </form>
           </div>
           <div className="col s6">
-            <img src="/assets/images/speech-writer.gif" style={{ width: '100%', padding: '4.8vw 0vw 2vw 2vw' }}/>
+              <p style={{padding: '10px'}}><strong>Words Per Minute:</strong> A larger number for this value will give you faster text scrolling while in VR.</p>
+              <img src="/assets/images/speech-writer.gif" style={{ width: '100%', padding: '1vw 0vw 2vw 2vw' }}/>
           </div>
         </div>
       </div>
