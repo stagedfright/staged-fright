@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styles from './styles';
 import InitialLoading from '../InitialLoading';
 import VolumeBar from '../VolumeBar';
-import SpeechLine from '../SpeechLines';
 import 'aframe';
 import PitchTracker from '../PitchTracker';
 
@@ -63,7 +62,7 @@ export default class VRViewer extends Component {
       } else return (
         <div style={styles.container}>
         {this.state.clap && <audio src='/assets/audio/bravo.mp3' autoPlay></audio>}
-          <a-scene auto-enter-vr="false">
+          <a-scene>
             <a-assets>
               <audio src="/assets/audio/CrowdNoise4.mp3" autoPlay loop></audio>
               <video muted id="mvp" autoPlay loop src="/assets/videos/DT_RNC.mp4" />
@@ -79,13 +78,18 @@ export default class VRViewer extends Component {
                       position="-53 46 72"
                       material="color: gray"></a-entity>
             <a-entity geometry="primitive: box; height: 80px; width: 200px"
-                      position="-40.27 139.62 -39.42"
-                      rotation="48.30 -11.12 0.18"
+                      position="2959.52 543.21 -2541.69"
+                      rotation="0 -49 0"
+                      scale="5 2 1"
                       material="color: black"></a-entity>
             <a-entity text="value: Turn around!\nYour fans are waiting!"
                       position="-70 44.50 70.68"
                       rotation="0 180 0"
                       scale="100 100 100"></a-entity>
+            <a-entity geometry="primitive: box; height: 80px; width: 200px"
+                      position="-40.27 139.62 -39.42"
+                      rotation="48.30 -11.12 0.18"
+                      material="color: black"></a-entity>
             <VolumeBar volume={volume} />
             {this.speechLines
               .map((line, idx) => ({
@@ -93,7 +97,23 @@ export default class VRViewer extends Component {
               }))
               .filter(({ position: [x, y, z] }) => y > 1 && y < 5)
               .map(({ line, position, idx }) =>
-                <SpeechLine key={idx} line={line} position={position} idx={idx}/>
+                <a-entity key={idx} idx={idx}>
+                  <a-entity
+                    position={`3.01 ${position[1]} 1.29`}
+                    rotation="-4.00 -42.00 0"
+                    scale="1.015 1.015 1.015"
+                    geometry="primitive: plane; width: 100"
+                    material="side: double; transparent: true; opacity: 0; color: #000000;"
+                    text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center; color: black`}>
+                  </a-entity>
+                  <a-entity
+                    position={ position.join(' ') }
+                    rotation="-4.00 -42.00 0"
+                    geometry="primitive: plane; width: 100"
+                    material="side: double; transparent: true; opacity: 0; color: #EF2D5E"
+                    text={`value: ${line}; line-height: 30px; anchor: center; wrapCount: 1000; align: center;`}>
+                  </a-entity>
+                </a-entity>
             )}
           </a-scene>
         </div>
