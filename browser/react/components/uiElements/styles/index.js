@@ -2,7 +2,7 @@ export default {
 
 	myraisedbuttonlabel: {
 		fontFamily: 'Open Sans, sans-serif',
-		fontSize: '3vh',
+		fontSize: '2.5vh',
 		color: 'white',
 		fontWeight: '600',
 	},
@@ -11,7 +11,8 @@ export default {
 		borderRadius: '15px',
 		lineHeight: '0vh',
 		display: 'block',
-		margin: '0'
+		margin: '0',
+		minWidth: '180px'
 	},
 
 	sflabel: {

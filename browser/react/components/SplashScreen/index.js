@@ -41,7 +41,7 @@ export default class SplashScreen extends Component {
             </div>
             <div className="col s4">
       				<Link to={`/${this.props.params.sessionKey}/select`}>
-      					<VRButton label={"Let's Go!"} color={teal300} type={"submit"} style={{width: '40%'}}/>
+      					<VRButton label={"Let's Go!"} color={teal300} type={"submit"} />
       				</Link>
             </div>
             <div className="col s4">

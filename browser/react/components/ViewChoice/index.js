@@ -65,8 +65,10 @@ class ViewChoice extends Component {
                             </ul>
                             <p style={{fontSize: '18px'}}><strong>{window.location.href.replace(/choose-view/, "practice")}</strong></p>
                             <br/>
+                            <p style={{fontSize: '14px'}}>Click the button below once you are done in mobile VR</p>
+                            <br/>
                             <Link to={`/${this.props.params.sessionKey}/feedback`}>
-                                <VRButton label={"Click here when mobile VR finishes"} color={teal300} type={"submit"} onClick={this.handleClick} />
+                                <VRButton label={"Done with VR"} color={teal300} type={"submit"} onClick={this.handleClick} />
                             </Link>
                             <HelpNote />
                         </div>
