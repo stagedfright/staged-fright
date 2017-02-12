@@ -77,11 +77,6 @@ export default class VRViewer extends Component {
             <a-entity geometry="primitive: box; height: 50px; width: 80px"
                       position="-53 46 72"
                       material="color: gray"></a-entity>
-            <a-entity geometry="primitive: box; height: 80px; width: 200px"
-                      position="2959.52 543.21 -2541.69"
-                      rotation="0 -49 0"
-                      scale="5 2 1"
-                      material="color: black"></a-entity>
             <a-entity text="value: Turn around!\nYour fans are waiting!"
                       position="-70 44.50 70.68"
                       rotation="0 180 0"
