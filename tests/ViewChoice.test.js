@@ -1,7 +1,7 @@
 import React from 'react';
-import expect from 'expect';
 import { shallow } from 'enzyme';
 import ViewChoice from '../browser/react/components/ViewChoice';
+const expect = require('chai');
 
 describe ('Component: ViewChoice', () => {
 
