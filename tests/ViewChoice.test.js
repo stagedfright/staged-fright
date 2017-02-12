@@ -1,5 +1,5 @@
 import React from 'react';
-import expect from 'expect';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import ViewChoice from '../browser/react/components/ViewChoice';
 

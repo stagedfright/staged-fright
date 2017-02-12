@@ -1,5 +1,5 @@
 import React from 'react';
-import expect from 'expect';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import HelpHint from '../browser/react/components/HelpHint';
 import HelpNote from '../browser/react/components/HelpNote';
@@ -11,24 +11,21 @@ describe ('Simple Components:', () => {
 		expect(
 			shallow(
 				<HelpHint />
-			).length
-		).toEqual(1);
+			).is('div')).to.be.equal(true);
 	});
 
 	it ('HelpNote renders without issues', () => {
 		expect(
 			shallow(
 				<HelpNote />
-			).length
-		).toEqual(1);
+			).is('div')).to.be.equal(true);
 	});
 	
 	it ('HowTo renders without issues', () => {
 		expect(
 			shallow(
 				<HowTo />
-			).length
-		).toEqual(1);
+			).is('div')).to.be.equal(true);
 	});
 
 });
