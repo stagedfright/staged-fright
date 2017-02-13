@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html ",
     "build": "webpack --config webpack.dist.config.js",
-    "test": "mocha --compilers js:babel-register tests/*.test.js"
+    "test": "mocha --require tests/setup.js --compilers js:babel-register tests/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -61,6 +61,7 @@
     "eslint-plugin-promise": "^3.4.1",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-standard": "^2.0.1",
+    "jsdom": "^9.11.0",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.17.7",
