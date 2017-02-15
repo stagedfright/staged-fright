@@ -3,7 +3,8 @@ import firedux, { firebaseApp } from '../store/firedux';
 const sessionKey = firedux.ref.key;
 
 const goToSummary = dispatch => {
-	dispatch(push(`/${sessionKey}/feedback`));
+	// dispatch(push(`/${sessionKey}/feedback`));
+	window.location.href = `/${sessionKey}/feedback`;
 };
 
 const goToChooseView = dispatch => {

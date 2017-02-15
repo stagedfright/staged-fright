@@ -5,9 +5,9 @@ const favicon = require('serve-favicon');
 module.exports = (app) => {
   const root = app.getValue('projectRoot');
 
-  const npmPath = path.join(root, './node_modules');
+  const npmPath = path.join(root, '../node_modules');
   const browserPath = path.join(root, './browser');
-  const publicPath = path.join(root, './public');
+  const publicPath = path.join(root, '../public');
 
   app.use(express.static(npmPath));
   app.use(express.static(browserPath));

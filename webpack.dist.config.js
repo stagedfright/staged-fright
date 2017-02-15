@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './browser/react/index.js',
+  entry: './src/browser/react/index.js',
   output: {
     path: __dirname,
     filename: './public/bundle.min.js',
