@@ -55,7 +55,7 @@ class AudioSession extends Component {
             }
         this.meterInterval = setInterval(() => {
             this.props.syncData(soundMeter.slow.toFixed(2), this.pitch)
-        }, 200);
+        }, 16);
       });
     }
 
